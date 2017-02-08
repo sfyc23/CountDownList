@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <item
+        android:id="@+id/action_restart"
+        android:title="@string/action_restart"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_pause"
+        android:title="@string/action_pause"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_goon"
+        android:title="@string/action_goon"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_finsh"
+        android:title="@string/action_finsh"
+        app:showAsAction="never"/>
+</menu>

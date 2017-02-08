@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">" CountDownList"</string>
+
+    <string name="action_restart">重新开始</string>
+    <string name="action_pause">暂停</string>
+    <string name="action_goon">继续</string>
+    <string name="action_finsh">结束</string>
+</resources>
