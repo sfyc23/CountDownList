@@ -7,50 +7,56 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sfyc.countdownlist.utils.TimeTools;
 
 /**
  * Author :leilei on 2016/11/11 2300.
  */
 public class CountDownSimpleActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public TextView mTvCountDownTime;
-    public Button btnStart, btnCancel;
 
     private Context mContext;
     private Toolbar mToolbar;
 
-    private final static int BEGIN_COUNT_TIME = 62 * 1000;
-
     private CountDownTimer mCountDownTimer;
 
+    private static final long MAX_TIME = 12000;
+    private long curTime = 0;
+    private boolean isPause = false;
+
+    private TextView mTimerTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple);
+        setContentView(R.layout.activity_common);
         mContext = this;
-        btnStart = (Button) findViewById(R.id.btn_start);
-        btnCancel = (Button) findViewById(R.id.btn_cancel);
-        btnStart.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+        findViewById(R.id.btn_start).setOnClickListener(this);
+        findViewById(R.id.btn_pause).setOnClickListener(this);
+        findViewById(R.id.btn_cancel).setOnClickListener(this);
+        findViewById(R.id.btn_resume).setOnClickListener(this);
+        mTimerTv = (TextView) findViewById(R.id.tv_countTime);
 
-        //倒计时30秒，每秒进行一下计时
-        mCountDownTimer = new CountDownTimer(30 * 1000, 1000) {
+        initCountDownTimer(MAX_TIME);
+        mCountDownTimer.start();
+    }
+
+    public void initCountDownTimer(long millisInFuture) {
+        mCountDownTimer = new CountDownTimer(millisInFuture, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mTvCountDownTime.setText("剩余时间: " + millisUntilFinished / 1000 + "秒");
-
+                curTime = millisUntilFinished;
+                mTimerTv.setText(TimeTools.getCountTimeByLong(millisUntilFinished));
+                isPause = false;
             }
 
             public void onFinish() {
-                mTvCountDownTime.setText("完成!");
+                mTimerTv.setText("完成!");
             }
         };
-
-
     }
 
 
@@ -58,12 +64,31 @@ public class CountDownSimpleActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_start:
-                mCountDownTimer.start();
+
+                if (isPause && (curTime < MAX_TIME && curTime > 0)) {
+                    initCountDownTimer(curTime);
+                    mCountDownTimer.start();
+                } else {
+                    mCountDownTimer.start();
+                }
                 break;
             case R.id.btn_cancel:
                 mCountDownTimer.cancel();
                 break;
             case R.id.btn_pause:
+                if (!isPause) {
+                    isPause = true;
+                    mCountDownTimer.cancel();
+                } else {//继续播放
+                    if (curTime != 0) {
+                        initCountDownTimer(curTime);
+                        mCountDownTimer.start();
+                        isPause = false;
+                    }
+                }
+                break;
+            case R.id.btn_resume:
+                mCountDownTimer.start();
                 break;
             default:
                 break;
