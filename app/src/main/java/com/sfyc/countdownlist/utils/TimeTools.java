@@ -4,7 +4,6 @@ package com.sfyc.countdownlist.utils;
  * Author :leilei on 2016/11/11 2326.
  */
 public class TimeTools {
-    private static final String TAG = "TimeUtils";
 
     //毫秒换成00:00:00
     public static String getCountTimeByLong(long finishTime) {

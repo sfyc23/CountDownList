@@ -8,8 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- MainActivity,TimeSimpleActivity,SimpleActivity,CountDownSimpleActivity  -->
-        <activity android:name=".CountDownSimpleActivity">
+        <!-- MainActivity,TimerSimpleActivity,SimpleActivity,CountDownSimpleActivity,HandlerSimpleActivity,SmsActivity ,CountDownCustomActivity -->
+        <activity android:name=".CountDownCustomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

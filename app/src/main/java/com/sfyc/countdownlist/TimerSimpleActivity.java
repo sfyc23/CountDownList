@@ -82,18 +82,17 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-//    start,cancel,pause,resume
+    //    start,cancel,pause,resume
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_start:
-                //已经结束或者还没有开始时。或者按了暂停标记。
-                if (curTime == 0 || isPause) {
-                    destroyTimer();
-                    initTimer();
-                    mTimer.schedule(mTimerTask, 0, 1000);
-                    isPause = false;
-                }
+
+                destroyTimer();
+                initTimer();
+                isPause = false;
+                mTimer.schedule(mTimerTask, 0, 1000);
+
                 break;
             case R.id.btn_cancel:
                 //如果 curTime == 0，则不需要执行此操
@@ -101,6 +100,7 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
                     break;
                 }
                 curTime = 0;
+                isPause = false;
                 mTimer.cancel();
                 break;
             case R.id.btn_pause:
@@ -111,20 +111,17 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
                 if (!isPause) {
                     isPause = true;
                     mTimer.cancel();
-                } else {///如果已经是暂停状态，则继续倒计功能
+                }
+                break;
+
+            case R.id.btn_resume:
+                //已经结束或者还没有开始时。或者按了暂停标记。
+                if (curTime != 0 && isPause) {
                     destroyTimer();
                     initTimer();
                     mTimer.schedule(mTimerTask, 0, 1000);
                     isPause = false;
                 }
-                break;
-
-            case R.id.btn_resume:
-                curTime = 0;
-                destroyTimer();
-                initTimer();
-                mTimer.schedule(mTimerTask, 0, 1000);
-                isPause = false;
                 break;
             default:
                 break;
@@ -148,7 +145,6 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
             }
         }
     };
-
 
 
     @Override
