@@ -9,13 +9,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!-- MainActivity,TimerSimpleActivity,SimpleActivity,CountDownSimpleActivity,HandlerSimpleActivity,SmsActivity ,CountDownCustomActivity -->
-        <activity android:name=".CountDownCustomActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CountDownSimpleActivity"/>
+        <activity android:name=".SmsActivity"/>
+        <activity android:name=".HandlerSimpleActivity"/>
+        <activity android:name=".TimerSimpleActivity"/>
+        <activity android:name=".CountDownCustomActivity"/>
+        <activity android:name=".ValueAnimatorActivity"/>
     </application>
 
 </manifest>

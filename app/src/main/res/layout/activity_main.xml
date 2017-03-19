@@ -5,23 +5,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <include layout="@layout/item_toolbar" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:titleTextAppearance="@string/action_pause"
-        app:titleTextColor="@android:color/white"
-        />
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="简单的倒计时使用" />
+
+    <Button
+        android:id="@+id/btn_timer"
+        style="@style/textView_show"
+        android:text="@string/title_timer_user" />
+
+    <Button
+        android:id="@+id/btn_hanlder"
+        style="@style/textView_show"
+        android:text="@string/title_hanlder_user" />
+
+    <Button
+        android:id="@+id/btn_countTime"
+        style="@style/textView_show"
+        android:text="@string/title_countdown_user" />
+
+    <Button
+        android:id="@+id/btn_valueAnimator"
+        style="@style/textView_show"
+        android:text="@string/title_valueAnimatior_user" />
+
 
     <TextView
-        android:id="@+id/tv_hanlder"
-        style="@style/textView_show"
-        android:text="hanlder" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:text="其他的功能" />
 
-    <TextView
-        android:id="@+id/tv_countTime"
+    <Button
+        android:id="@+id/btn_countTime_custom"
         style="@style/textView_show"
-        android:text="countTime" />
+        android:text="@string/title_countTime_custom" />
+
+    <Button
+        android:id="@+id/btn_sms"
+        style="@style/textView_show"
+        android:text="短信倒计时" />
 
 </LinearLayout>

@@ -12,6 +12,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ProgressBar
+            android:id="@+id/pb_va"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progress="0"
+            android:max="100"
+            android:layout_weight="6"
+            android:paddingLeft="6dp"
+            android:paddingRight="2dp"
+            />
+        <TextView
+            android:id="@+id/tv_va_percent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0%"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="64dp">
 
         <Button

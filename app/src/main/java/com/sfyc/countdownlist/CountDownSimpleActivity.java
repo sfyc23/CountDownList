@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,17 +20,21 @@ public class CountDownSimpleActivity extends AppCompatActivity implements View.O
     private Context mContext;
     private CountDownTimer mCountDownTimer;
 
-    private static final long MAX_TIME = 12000;
+    private static final long MAX_TIME = 62 * 1000;
     private long curTime = 0;
     private boolean isPause = false;
 
     private TextView mTimerTv;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common);
         mContext = this;
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle(R.string.title_countdown_user);
+
         findViewById(R.id.btn_start).setOnClickListener(this);
         findViewById(R.id.btn_pause).setOnClickListener(this);
         findViewById(R.id.btn_cancel).setOnClickListener(this);

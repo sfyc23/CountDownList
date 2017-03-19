@@ -5,4 +5,9 @@
     <string name="action_pause">暂停</string>
     <string name="action_goon">继续</string>
     <string name="action_finsh">结束</string>
+    <string name="title_timer_user">Timer 实现 倒计时</string>
+    <string name="title_hanlder_user">Hanlder 实现 倒计时</string>
+    <string name="title_countdown_user">CountDownTime 实现 倒计时</string>
+    <string name="title_valueAnimatior_user">ValueAnimator 动画 实现 倒计时</string>
+    <string name="title_countTime_custom">自定义 CountDownTime</string>
 </resources>

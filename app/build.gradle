@@ -27,6 +27,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     //view注入
     compile 'com.jakewharton:butterknife:8.2.1'
+    compile "io.reactivex.rxjava2:rxjava:2.0.7"
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
     testCompile 'junit:junit:4.12'
+
+
 }
