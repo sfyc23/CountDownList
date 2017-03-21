@@ -47,7 +47,7 @@ public class CountDownCustomActivity extends AppCompatActivity implements View.O
     public void initCountDownTimer() {
         mCountDownTimer = new CountDown();
         mCountDownTimer.setMillisInFuture(MAX_TIME);
-        mCountDownTimer.setCountdownInterval(3000);
+        mCountDownTimer.setCountdownInterval(1000);
         mCountDownTimer.setCountDownListener(new CountDown.CountDownListener() {
             @Override
             public void onStart() {
@@ -84,5 +84,14 @@ public class CountDownCustomActivity extends AppCompatActivity implements View.O
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+
     }
 }

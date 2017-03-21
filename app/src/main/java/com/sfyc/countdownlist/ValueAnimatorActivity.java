@@ -48,8 +48,7 @@ public class ValueAnimatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_value_anim);
         ButterKnife.bind(this);
         mContext = this;
-        toolbar.setTitle("ValueAnimator 动画 实现 倒计时");
-        mTimerTv = (TextView) findViewById(R.id.tv_countTime);
+        toolbar.setTitle(R.string.title_valueAnimatior_user);
         initValueAnimator();
         mAnimator.start();
     }

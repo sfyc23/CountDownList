@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.sfyc.countdownlist.listview.CountDownListActivity;
+import com.sfyc.countdownlist.listview.CountDownRecyclerViewActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_timer,
             R.id.btn_hanlder,
             R.id.btn_countTime,
-            R.id.btn_countTime_custom,
             R.id.btn_valueAnimator,
+            R.id.btn_rxJava,
+            R.id.btn_list_list,
+            R.id.btn_list_recycler,
+            R.id.btn_countTime_custom,
             R.id.btn_sms
     })
     public void onClick(View view) {
@@ -45,7 +51,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_valueAnimator:
                 startActivity(new Intent(this, ValueAnimatorActivity.class));
                 break;
+            case R.id.btn_rxJava:
+                startActivity(new Intent(this, RxJavaActivity.class));
+                break;
 
+            case R.id.btn_list_list:
+                startActivity(new Intent(this, CountDownListActivity.class));
+                break;
+            case R.id.btn_list_recycler:
+                startActivity(new Intent(this, CountDownRecyclerViewActivity.class));
+                break;
 
             case R.id.btn_countTime_custom:
                 startActivity(new Intent(this, CountDownCustomActivity.class));
