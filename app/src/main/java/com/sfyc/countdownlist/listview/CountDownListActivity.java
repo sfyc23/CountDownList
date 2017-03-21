@@ -56,13 +56,10 @@ public class CountDownListActivity extends AppCompatActivity {
     }
 
     public static class MyAdapter extends BaseAdapter {
-
         private List<TimerItem> mDatas;
         private Context mContext;
-
         //用于退出activity,避免countdown，造成资源浪费。
         private SparseArray<CountDownTimer> countDownCounters;
-
 
         public MyAdapter(Context mContext, List<TimerItem> mDatas) {
             this.mContext = mContext;
@@ -154,11 +151,7 @@ public class CountDownListActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mAdapter != null) {
-            mAdapter.cancelAllTimers();
-        }
-    }
+
+
+
 }
