@@ -7,7 +7,7 @@
 不多说直接上图吧
 ![主菜单][1]
 
-简单用例：分别用 **Timer** **Hanlder** **CountDownTimer** **ValueAnimator** **RxJava** 实现倒计时。还有一部分实现 pause resume 功能。
+简单用例：分别用 **Timer**、 **Hanlder**、 **CountDownTimer** 、**ValueAnimator**、 **RxJava** 实现倒计时。还有一部分实现 pause resume 功能。
 
 ![简单用例][2]
 
