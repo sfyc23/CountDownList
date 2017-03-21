@@ -17,6 +17,6 @@
 
 其他，短信倒计时 && 更自由的 CountDownTimer 类。
 
-  [1]: http://oihnadz1x.bkt.clouddn.com/countdown_menu.png
-  [2]: http://oihnadz1x.bkt.clouddn.com/countTime_github_02
-  [3]: http://oihnadz1x.bkt.clouddn.com/countdown_recylerview.png
+  [1]: http://oihnadz1x.bkt.clouddn.com/countdown_menu.png?imageView2/3/w/360/h/640/interlace/1
+  [2]: http://oihnadz1x.bkt.clouddn.com/countTime_github_02?imageView2/3/w/360/h/640/interlace/1
+  [3]: http://oihnadz1x.bkt.clouddn.com/countdown_recylerview.png?imageView2/3/w/360/h/640/interlace/1
