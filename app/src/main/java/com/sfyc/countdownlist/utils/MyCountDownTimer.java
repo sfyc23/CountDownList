@@ -6,7 +6,7 @@ import android.os.SystemClock;
 
 /**
  * Author :leilei on 2017/2/8 2020.
- * 这个是对CountDownTimer原代码的解析
+ * 这个是对 CountDownTimer 原代码的解析
  */
 public abstract class MyCountDownTimer {
 

@@ -63,7 +63,6 @@ public class RxJavaActivity extends AppCompatActivity {
         /**
          * RxJava 方式实现
          */
-
         mObservable = Observable.interval(0, 1000, TimeUnit.MILLISECONDS)//它在指定延迟之后先发射一个零值，然后再按照指定的时间间隔发射递增的数字,设置0延迟，每隔1000毫秒发送一条数据
                 .take(MAX_TIME / 1000 + 1)//设置总共发送的次数
                 .map(new Function<Long, Long>() {//long 值是从0到最大，倒计时需要将值倒置

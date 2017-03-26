@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
 
         <include layout="@layout/item_toolbar" />
 
@@ -42,6 +43,11 @@
             style="@style/textView_show"
             android:text="@string/title_rxjava_user" />
 
+        <Button
+            android:id="@+id/btn_chronomete"
+            style="@style/textView_show"
+            android:text="@string/title_chronometer_user" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,6 +64,27 @@
             style="@style/textView_show"
             android:text="@string/title_recyclerView_countdown" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="发送短信倒计时" />
+
+        <Button
+            android:id="@+id/btn_sms_handlerUtil"
+            style="@style/textView_show"
+            android:text="@string/title_sms_hanlderUtil" />
+
+        <Button
+            android:id="@+id/btn_sms_rxJava"
+            style="@style/textView_show"
+            android:text="@string/title_sms_rxjava" />
+
+        <Button
+            android:id="@+id/btn_sms_countDownButton"
+            style="@style/textView_show"
+            android:text="@string/title_sms_countDownButton" />
+
 
         <TextView
             android:layout_width="match_parent"
@@ -69,11 +96,6 @@
             android:id="@+id/btn_countTime_custom"
             style="@style/textView_show"
             android:text="@string/title_countTime_custom" />
-
-        <Button
-            android:id="@+id/btn_sms"
-            style="@style/textView_show"
-            android:text="短信倒计时" />
 
     </LinearLayout>
 

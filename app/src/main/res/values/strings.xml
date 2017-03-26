@@ -7,13 +7,21 @@
     <string name="action_finsh">结束</string>
     <string name="title_timer_user">Timer 实现 倒计时</string>
     <string name="title_hanlder_user">Hanlder 实现 倒计时</string>
-    <string name="title_countdown_user">CountDownTime 实现 倒计时</string>
+    <string name="title_countdown_user">CountDownTimer 实现 倒计时</string>
     <string name="title_valueAnimatior_user">ValueAnimator 动画 实现 倒计时</string>
     <string name="title_rxjava_user">RxJava 实现 倒计时</string>
+    <string name="title_chronometer_user">chronometer 实现 倒计时</string>
+
 
 
     <string name="title_list_view_countdown">ListView 列表样式的倒计时</string>
     <string name="title_recyclerView_countdown">RecyclerView 列表样式的倒计时</string>
 
-    <string name="title_countTime_custom">自定义 CountDownTime</string>
+    <string name="title_countTime_custom">自定义 CountDownTimer </string>
+    <string name="title_sms_hanlderUtil">短信倒计时 HandlerUtil工具类 实现</string>
+    <string name="title_sms_rxjava">短信倒计时 RxJava 实现</string>
+    <string name="title_sms_countDownButton">短信倒计时 自定义button 实现</string>
+
+
+    <string name="sms_send_code">发送验证码</string>
 </resources>

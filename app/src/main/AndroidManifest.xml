@@ -16,15 +16,25 @@
             </intent-filter>
         </activity>
         <activity android:name=".CountDownSimpleActivity"/>
-        <activity android:name=".SmsActivity"/>
+        <activity android:name=".sms.SmsHandlerActivity"/>
+        <activity android:name=".sms.SmsRxJavaActivity"/>
+        <activity android:name=".sms.SmsCountDownButtonActivity"/>
+
+
         <activity android:name=".HandlerSimpleActivity"/>
         <activity android:name=".TimerSimpleActivity"/>
         <activity android:name=".CountDownCustomActivity"/>
         <activity android:name=".ValueAnimatorActivity"/>
+        <activity android:name=".ChronometerActivity"/>
         <activity android:name=".RxJavaActivity"/>
+
+
+
 
         <activity android:name=".listview.CountDownRecyclerViewActivity"/>
         <activity android:name=".listview.CountDownListActivity"/>
+
+
     </application>
 
 </manifest>

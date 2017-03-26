@@ -8,6 +8,9 @@ import android.view.View;
 
 import com.sfyc.countdownlist.listview.CountDownListActivity;
 import com.sfyc.countdownlist.listview.CountDownRecyclerViewActivity;
+import com.sfyc.countdownlist.sms.SmsCountDownButtonActivity;
+import com.sfyc.countdownlist.sms.SmsHandlerActivity;
+import com.sfyc.countdownlist.sms.SmsRxJavaActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,10 +35,14 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_countTime,
             R.id.btn_valueAnimator,
             R.id.btn_rxJava,
+            R.id.btn_chronomete,
             R.id.btn_list_list,
             R.id.btn_list_recycler,
             R.id.btn_countTime_custom,
-            R.id.btn_sms
+            R.id.btn_sms_countDownButton,
+            R.id.btn_sms_handlerUtil,
+            R.id.btn_sms_rxJava
+
     })
     public void onClick(View view) {
         switch (view.getId()) {
@@ -54,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_rxJava:
                 startActivity(new Intent(this, RxJavaActivity.class));
                 break;
+            case R.id.btn_chronomete:
+                startActivity(new Intent(this, ChronometerActivity.class));
+                break;
 
             case R.id.btn_list_list:
                 startActivity(new Intent(this, CountDownListActivity.class));
@@ -65,9 +75,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_countTime_custom:
                 startActivity(new Intent(this, CountDownCustomActivity.class));
                 break;
-            case R.id.btn_sms:
-                startActivity(new Intent(this, SmsActivity.class));
+
+            case R.id.btn_sms_handlerUtil:
+                startActivity(new Intent(this, SmsHandlerActivity.class));
                 break;
+            case R.id.btn_sms_countDownButton:
+                startActivity(new Intent(this, SmsCountDownButtonActivity.class));
+                break;
+
+
+            case R.id.btn_sms_rxJava:
+                startActivity(new Intent(this, SmsRxJavaActivity.class));
+                break;
+
 
             default:
                 break;
