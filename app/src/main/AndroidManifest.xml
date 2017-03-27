@@ -27,12 +27,16 @@
         <activity android:name=".ValueAnimatorActivity"/>
         <activity android:name=".ChronometerActivity"/>
         <activity android:name=".RxJavaActivity"/>
+        <activity android:name=".AlarmActivity" android:launchMode="singleTop"/>
+
 
 
 
 
         <activity android:name=".listview.CountDownRecyclerViewActivity"/>
         <activity android:name=".listview.CountDownListActivity"/>
+
+        <receiver android:name=".receiver.TimerExpiredReceiver"/>
 
 
     </application>

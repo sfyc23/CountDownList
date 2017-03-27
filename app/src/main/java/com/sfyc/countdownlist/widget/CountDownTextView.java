@@ -1,4 +1,4 @@
-package com.sfyc.countdownlist.utils;
+package com.sfyc.countdownlist.widget;
 
 
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+
+import com.sfyc.countdownlist.utils.CountDown;
 
 import java.util.Formatter;
 import java.util.IllegalFormatException;
@@ -35,7 +37,7 @@ public class CountDownTextView extends AppCompatTextView {
     private boolean isAutoShowText;
     private CountDownCallback countDownCallback;
     
-    private CountDown  mCountDownHelper;
+    private CountDown mCountDownHelper;
     private boolean mVisible;
     private boolean mStarted;
     private boolean mRunning;

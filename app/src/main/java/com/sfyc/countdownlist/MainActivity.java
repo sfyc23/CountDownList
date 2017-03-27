@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_valueAnimator,
             R.id.btn_rxJava,
             R.id.btn_chronomete,
+            R.id.btn_alarm,
             R.id.btn_list_list,
             R.id.btn_list_recycler,
             R.id.btn_countTime_custom,
@@ -64,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_chronomete:
                 startActivity(new Intent(this, ChronometerActivity.class));
                 break;
+            case R.id.btn_alarm:
+                startActivity(new Intent(this, AlarmActivity.class));
+                break;
+
 
             case R.id.btn_list_list:
                 startActivity(new Intent(this, CountDownListActivity.class));

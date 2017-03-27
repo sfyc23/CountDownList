@@ -11,11 +11,12 @@
     <string name="title_valueAnimatior_user">ValueAnimator 动画 实现 倒计时</string>
     <string name="title_rxjava_user">RxJava 实现 倒计时</string>
     <string name="title_chronometer_user">chronometer 实现 倒计时</string>
-
+    <string name="title_alarm_user">倒计时结束时发送通知</string>
 
 
     <string name="title_list_view_countdown">ListView 列表样式的倒计时</string>
     <string name="title_recyclerView_countdown">RecyclerView 列表样式的倒计时</string>
+
 
     <string name="title_countTime_custom">自定义 CountDownTimer </string>
     <string name="title_sms_hanlderUtil">短信倒计时 HandlerUtil工具类 实现</string>
@@ -24,4 +25,6 @@
 
 
     <string name="sms_send_code">发送验证码</string>
+
+    <string name="timer_finished">时间结束</string>
 </resources>

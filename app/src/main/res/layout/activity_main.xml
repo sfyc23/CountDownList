@@ -46,7 +46,14 @@
         <Button
             android:id="@+id/btn_chronomete"
             style="@style/textView_show"
-            android:text="@string/title_chronometer_user" />
+            android:text="@string/title_chronometer_user"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/btn_alarm"
+            style="@style/textView_show"
+            android:text="@string/title_alarm_user"
+            />
+
 
         <TextView
             android:layout_width="match_parent"
