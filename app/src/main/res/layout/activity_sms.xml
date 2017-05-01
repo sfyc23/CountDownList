@@ -58,5 +58,5 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="40dp"
-        android:text="提交" />
+        android:text="结束倒时" />
 </LinearLayout>

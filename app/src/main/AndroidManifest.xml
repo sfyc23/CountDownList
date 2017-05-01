@@ -18,6 +18,7 @@
         <activity android:name=".CountDownSimpleActivity"/>
         <activity android:name=".sms.SmsHandlerActivity"/>
         <activity android:name=".sms.SmsRxJavaActivity"/>
+        <activity android:name=".sms.SmsRxbindingActivity"/>
         <activity android:name=".sms.SmsCountDownButtonActivity"/>
 
 

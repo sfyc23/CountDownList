@@ -21,6 +21,7 @@
     <string name="title_countTime_custom">自定义 CountDownTimer </string>
     <string name="title_sms_hanlderUtil">短信倒计时 HandlerUtil工具类 实现</string>
     <string name="title_sms_rxjava">短信倒计时 RxJava 实现</string>
+    <string name="title_sms_rxbinding">短信倒计时 RxBinding 实现</string>
     <string name="title_sms_countDownButton">短信倒计时 自定义button 实现</string>
 
 

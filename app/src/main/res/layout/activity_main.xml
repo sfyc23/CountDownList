@@ -88,6 +88,11 @@
             android:text="@string/title_sms_rxjava" />
 
         <Button
+            android:id="@+id/btn_sms_rxbinding"
+            style="@style/textView_show"
+            android:text="@string/title_sms_rxbinding" />
+
+        <Button
             android:id="@+id/btn_sms_countDownButton"
             style="@style/textView_show"
             android:text="@string/title_sms_countDownButton" />

@@ -11,6 +11,7 @@ import com.sfyc.countdownlist.listview.CountDownRecyclerViewActivity;
 import com.sfyc.countdownlist.sms.SmsCountDownButtonActivity;
 import com.sfyc.countdownlist.sms.SmsHandlerActivity;
 import com.sfyc.countdownlist.sms.SmsRxJavaActivity;
+import com.sfyc.countdownlist.sms.SmsRxbindingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_countTime_custom,
             R.id.btn_sms_countDownButton,
             R.id.btn_sms_handlerUtil,
+            R.id.btn_sms_rxbinding,
             R.id.btn_sms_rxJava
 
     })
@@ -68,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_alarm:
                 startActivity(new Intent(this, AlarmActivity.class));
                 break;
-
-
             case R.id.btn_list_list:
                 startActivity(new Intent(this, CountDownListActivity.class));
                 break;
@@ -87,10 +87,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_sms_countDownButton:
                 startActivity(new Intent(this, SmsCountDownButtonActivity.class));
                 break;
-
-
             case R.id.btn_sms_rxJava:
                 startActivity(new Intent(this, SmsRxJavaActivity.class));
+                break;
+            case R.id.btn_sms_rxbinding:
+                startActivity(new Intent(this, SmsRxbindingActivity.class));
                 break;
 
 

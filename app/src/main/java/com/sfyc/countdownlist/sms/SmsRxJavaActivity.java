@@ -22,8 +22,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Author :leilei on 2017/2/8 1806.
- * CountDownUtils 短信倒计时使用
+ * Author :leilei on 2017/2/8 1806
+ * 用RxJava 实现短信倒计时
  */
 public class SmsRxJavaActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SmsRxJavaActivity";
