@@ -1,6 +1,4 @@
-# CountDown 倒计时学习笔记。
-
-标签（空格分隔）： Android CountDownTimer CountDown 
+# CountDown 倒计时的各种花式实现
 
 ---
 不多说直接上图吧
@@ -15,9 +13,10 @@
 
 ![倒计时列表][3]
 
-其他，多种方式（自定义CountDownButton,RxJava，工具类）实现短信倒计时 && 更多自定义功能的 CountDownTimer 类。
+其他，多种方式（自定义 CountDownButton,RxJava，工具类）实现短信倒计时 && 更多自定义功能的 CountDownTimer 类。
 
 ![短信倒计时列表][4]
+1.使用工具类一键实现; 2.自定义 Button 简洁实现。3.用 RxJava 实现; 4.用 RxBinding与 RxJava2 的方法。
 
   [1]: http://oihnadz1x.bkt.clouddn.com/countdown_menu.png?imageView2/3/w/360/h/640/interlace/1
   [2]: http://oihnadz1x.bkt.clouddn.com/countTime_github_02?imageView2/3/w/360/h/640/interlace/1
