@@ -15,10 +15,12 @@ import com.sfyc.countdownlist.R;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author :leilei on 2017/5/1 23:43
@@ -27,95 +29,94 @@ import io.reactivex.functions.Consumer;
 public class SmsRxbindingActivity extends AppCompatActivity {
     private static final String TAG = "SmsRxbindingActivity";
 
-    private TextView mSendMsmTv;
-
     private Context mContext;
 
+
     private Toolbar mToolbar;
-
-    private Disposable mDisposable;
-    private long MAX_TIME = 10;
-    private Observable<Object> verifyCodeObservable;
-
+    private TextView mBtnSendMsm;
     private Button mBtnClean;
+
+    //最大倒计时长
+    private static final long MAX_COUNT_TIME = 5;
+
+    private Observable<Long> mObservableCountTime;
+    private Consumer<Long> mConsumerCountTime;
+
+    //用于主动取消订阅倒计时，或者退出当前页面。
+    private Disposable mDisposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
         mContext = this;
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_sms_rxbinding);
 
-        mSendMsmTv = (TextView) findViewById(R.id.tv_send_sms);
-
+        mBtnSendMsm = (TextView) findViewById(R.id.tv_send_sms);
         mBtnClean = (Button) findViewById(R.id.btn_sms_submit);
-        initSendMsm();
 
+
+        //重置验证码按钮。
         RxView.clicks(mBtnClean).subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
-                if (mDisposable != null) {
+                if (mDisposable != null && !mDisposable.isDisposed()) {
+                    //停止倒计时
                     mDisposable.dispose();
-                    mSendMsmTv.setEnabled(true);
-                    mSendMsmTv.setText("发送短信");
+                    //重新订阅
+                    mDisposable = mObservableCountTime.subscribe(mConsumerCountTime);
+                    //按钮可点击
+                    RxView.enabled(mBtnSendMsm).accept(true);
+                    RxTextView.text(mBtnSendMsm).accept("发送验证码");
                 }
             }
         });
 
-    }
 
 
-    public void initSendMsm() {
-        verifyCodeObservable = RxView.clicks(mSendMsmTv).throttleFirst(MAX_TIME, TimeUnit.SECONDS)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .doOnNext(new Consumer<Object>() {
+        mObservableCountTime = RxView.clicks(mBtnSendMsm)
+                //防止重复点击
+                .throttleFirst(MAX_COUNT_TIME, TimeUnit.SECONDS)
+                //将点击事件转换成倒计时事件
+                .flatMap(new Function<Object, ObservableSource<Long>>() {
                     @Override
-                    public void accept(Object o) throws Exception {
-                        RxView.enabled(mSendMsmTv).accept(true);
-                        RxTextView.text(mSendMsmTv).accept("发送短信");
+                    public ObservableSource<Long> apply(Object o) throws Exception {
+                        //更新发送按钮的状态并初始化显现倒计时文字
+                        RxView.enabled(mBtnSendMsm).accept(false);
+                        RxTextView.text(mBtnSendMsm).accept("剩余 " + MAX_COUNT_TIME + " 秒");
+                        //在实际操作中可以在此发送获取网络的请求
+                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io()).take(MAX_COUNT_TIME);
                     }
-                });
+                })
+                //将递增数字替换成递减的倒计时数字
+                .map(new Function<Long, Long>() {
+                    @Override
+                    public Long apply(Long aLong) throws Exception {
+                        return MAX_COUNT_TIME - (aLong + 1);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread());
 
-        verifyCodeObservable.subscribe(new Consumer<Object>() {
+        mConsumerCountTime = new Consumer<Long>() {
             @Override
-            public void accept(Object o) throws Exception {
-                Observable.interval(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-                        .take(MAX_TIME)
-                        .subscribe(new Observer<Long>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                mDisposable = d;
-                            }
-
-                            @Override
-                            public void onNext(Long value) {
-                                try {
-                                    RxTextView.text(mSendMsmTv).accept("剩余" + (MAX_TIME - value) + "秒");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onComplete() {
-                                try {
-                                    RxView.enabled(mSendMsmTv).accept(true);
-                                    RxTextView.text(mSendMsmTv).accept("发送短信");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
+            public void accept(Long aLong) throws Exception {
+                //当倒计时为 0 时，还原btn按钮
+                if (aLong == 0) {
+                    RxView.enabled(mBtnSendMsm).accept(true);
+                    RxTextView.text(mBtnSendMsm).accept("发送验证码");
+                } else {
+                    RxTextView.text(mBtnSendMsm).accept("剩余 " + aLong + " 秒");
+                }
             }
-        });
+        };
+
+        //订阅
+        mDisposable = mObservableCountTime.subscribe(mConsumerCountTime);
+
     }
+
+
 
     @Override
     protected void onDestroy() {
@@ -123,11 +124,6 @@ public class SmsRxbindingActivity extends AppCompatActivity {
         if (mDisposable != null) {
             mDisposable.dispose();
         }
-        if (verifyCodeObservable != null) {
-            verifyCodeObservable.unsubscribeOn(AndroidSchedulers.mainThread());
-        }
-
-
     }
 
 

@@ -37,7 +37,7 @@ public class RxJavaActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    private static final long MAX_TIME = 12 * 1000;
+    private static final long MAX_TIME = 10;
 
     /**
      * 取消

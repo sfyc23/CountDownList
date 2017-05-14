@@ -36,8 +36,8 @@
             android:inputType="number"
             android:paddingLeft="6dp" />
 
-        <TextView
-            android:id="@+id/tv_send_sms"
+        <Button
+            android:id="@+id/btn_send_sms"
             android:layout_width="96dp"
             android:layout_height="48dp"
             android:layout_alignParentRight="true"
@@ -58,5 +58,5 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="40dp"
-        android:text="结束倒时" />
+        android:text="重置倒计时" />
 </LinearLayout>
