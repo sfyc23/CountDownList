@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.sfyc.countdownlist.listview.CountDownListActivity;
 import com.sfyc.countdownlist.listview.CountDownRecyclerViewActivity;
+import com.sfyc.countdownlist.sms.SmsKotilnActivity;
 import com.sfyc.countdownlist.sms.SmsCountDownButtonActivity;
 import com.sfyc.countdownlist.sms.SmsHandlerActivity;
 import com.sfyc.countdownlist.sms.SmsRxJavaActivity;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_sms_countDownButton,
             R.id.btn_sms_handlerUtil,
             R.id.btn_sms_rxbinding,
+            R.id.btn_sms_kotiln,
             R.id.btn_sms_rxJava
 
     })
@@ -93,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_sms_rxbinding:
                 startActivity(new Intent(this, SmsRxbindingActivity.class));
                 break;
-
-
+            case R.id.btn_sms_kotiln:
+                startActivity(new Intent(this, SmsKotilnActivity.class));
+                break;
             default:
                 break;
         }

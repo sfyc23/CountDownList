@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/item_toolbar" />
+    <include layout="@layout/layout_toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="4dp"
             android:layout_marginTop="4dp"
-            android:layout_toLeftOf="@+id/tv_send_sms"
+            android:layout_toLeftOf="@+id/btn_send_sms"
             android:background="@color/material_textBlack_dividers"
             android:hint="输入验证码"
             android:inputType="number"

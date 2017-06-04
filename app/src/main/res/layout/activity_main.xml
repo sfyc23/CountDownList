@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:paddingBottom="24dp">
 
-        <include layout="@layout/item_toolbar" />
+        <include layout="@layout/layout_toolbar" />
 
         <TextView
             android:layout_width="match_parent"
@@ -91,6 +91,11 @@
             android:id="@+id/btn_sms_rxbinding"
             style="@style/textView_show"
             android:text="@string/title_sms_rxbinding" />
+
+        <Button
+            android:id="@+id/btn_sms_kotiln"
+            style="@style/textView_show"
+            android:text="@string/title_sms_kotiln" />
 
         <Button
             android:id="@+id/btn_sms_countDownButton"

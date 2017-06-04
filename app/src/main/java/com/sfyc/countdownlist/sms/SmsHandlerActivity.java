@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.sfyc.countdownlist.R;
@@ -20,7 +20,7 @@ import com.sfyc.countdownlist.utils.CountDownSmsUtil;
 public class SmsHandlerActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SmsActivity";
     private CountDownSmsUtil countDown;
-    private TextView mSendMsmTv;
+    private Button mSendMsmBtn;
 
     private Context mContext;
 
@@ -35,10 +35,10 @@ public class SmsHandlerActivity extends AppCompatActivity implements View.OnClic
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_sms_hanlderUtil);
 
-        mSendMsmTv = (TextView) findViewById(R.id.tv_send_sms);
-        mSendMsmTv.setOnClickListener(this);
+        mSendMsmBtn = (Button) findViewById(R.id.btn_send_sms);
+        mSendMsmBtn.setOnClickListener(this);
 //        countDown = new CountDownSmsUtil(this, mSendMsmTv, "%s秒");
-        countDown = new CountDownSmsUtil(this,mSendMsmTv, "%s秒",10);
+        countDown = new CountDownSmsUtil(this, mSendMsmBtn, "%s秒", 10);
 //        countDown.start();
         countDown.setCountdownListener(new CountDownSmsUtil.CountdownListener() {
             @Override
@@ -62,7 +62,7 @@ public class SmsHandlerActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_send_sms:
+            case R.id.btn_send_sms:
                 countDown.start();
                 break;
             case R.id.btn_sms_submit:

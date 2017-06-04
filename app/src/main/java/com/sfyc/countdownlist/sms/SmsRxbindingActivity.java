@@ -37,7 +37,7 @@ public class SmsRxbindingActivity extends AppCompatActivity {
     private Button mBtnClean;
 
     //最大倒计时长
-    private static final long MAX_COUNT_TIME = 5;
+    private static final long MAX_COUNT_TIME = 10;
 
     private Observable<Long> mObservableCountTime;
     private Consumer<Long> mConsumerCountTime;
@@ -53,7 +53,7 @@ public class SmsRxbindingActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_sms_rxbinding);
 
-        mBtnSendMsm = (TextView) findViewById(R.id.tv_send_sms);
+        mBtnSendMsm = (TextView) findViewById(R.id.btn_send_sms);
         mBtnClean = (Button) findViewById(R.id.btn_sms_submit);
 
 
@@ -85,8 +85,8 @@ public class SmsRxbindingActivity extends AppCompatActivity {
                         //更新发送按钮的状态并初始化显现倒计时文字
                         RxView.enabled(mBtnSendMsm).accept(false);
                         RxTextView.text(mBtnSendMsm).accept("剩余 " + MAX_COUNT_TIME + " 秒");
-                        //在实际操作中可以在此发送获取网络的请求
-                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io()).take(MAX_COUNT_TIME);
+                        //在实际操作中可以在此发送获取网络的请求,,续1s
+                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io()).take(MAX_COUNT_TIME+1);
                     }
                 })
                 //将递增数字替换成递减的倒计时数字

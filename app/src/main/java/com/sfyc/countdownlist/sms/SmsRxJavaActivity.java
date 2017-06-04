@@ -37,8 +37,9 @@ public class SmsRxJavaActivity extends AppCompatActivity implements View.OnClick
     private static final long MAX_COUNT_TIME = 10;
 
     private Disposable mDisposable;
-    private Observable mObservable;
     private Observer mObserver;
+    private Observable mObservable;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class SmsRxJavaActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_send_sms:
+            case R.id.btn_send_sms:
                 if (mObservable == null) {
                     initCountDown();
                     mObservable.subscribe(mObserver);
@@ -88,11 +89,11 @@ public class SmsRxJavaActivity extends AppCompatActivity implements View.OnClick
          */
         //它在指定延迟之后先发射一个零值，然后再按照指定的时间间隔发射递增的数字,设置0延迟，每隔1000毫秒发送一条数据
         mObservable = Observable.interval(1, TimeUnit.SECONDS)
-                .take(MAX_COUNT_TIME)//设置总共发送的次数
+                .take(MAX_COUNT_TIME + 1)//设置总共发送的次数,续1s
                 .map(new Function<Long, Long>() {//数据转换 long 值是从0到最大，倒计时需要将值倒置
                     @Override
-                    public Long apply(Long aLong) throws Exception {
-                        return MAX_COUNT_TIME - aLong;
+                    public Long apply(Long aLong) throws Exception {//已经过了一秒
+                        return MAX_COUNT_TIME - aLong - 1;
                     }
                 })
                 .subscribeOn(Schedulers.computation())

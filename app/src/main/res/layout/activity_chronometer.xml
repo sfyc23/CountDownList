@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/item_toolbar" />
+    <include layout="@layout/layout_toolbar" />
 
     <Chronometer
         android:id="@+id/chronometer"

@@ -8,36 +8,35 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- MainActivity,listview.CountDownRecyclerViewActivity-->
+
+        <!-- MainActivity,listview.CountDownRecyclerViewActivity -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CountDownSimpleActivity"/>
-        <activity android:name=".sms.SmsHandlerActivity"/>
-        <activity android:name=".sms.SmsRxJavaActivity"/>
-        <activity android:name=".sms.SmsRxbindingActivity"/>
-        <activity android:name=".sms.SmsCountDownButtonActivity"/>
+        <activity android:name=".CountDownSimpleActivity" />
+        <activity android:name=".sms.SmsHandlerActivity" />
+        <activity android:name=".sms.SmsRxJavaActivity" />
+        <activity android:name=".sms.SmsRxbindingActivity" />
+        <activity android:name=".sms.SmsCountDownButtonActivity" />
+        <activity android:name=".sms.SmsKotilnActivity"/>
 
+        <activity android:name=".HandlerSimpleActivity" />
+        <activity android:name=".TimerSimpleActivity" />
+        <activity android:name=".CountDownCustomActivity" />
+        <activity android:name=".ValueAnimatorActivity" />
+        <activity android:name=".ChronometerActivity" />
+        <activity android:name=".RxJavaActivity" />
+        <activity
+            android:name=".AlarmActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".listview.CountDownRecyclerViewActivity" />
+        <activity android:name=".listview.CountDownListActivity" />
 
-        <activity android:name=".HandlerSimpleActivity"/>
-        <activity android:name=".TimerSimpleActivity"/>
-        <activity android:name=".CountDownCustomActivity"/>
-        <activity android:name=".ValueAnimatorActivity"/>
-        <activity android:name=".ChronometerActivity"/>
-        <activity android:name=".RxJavaActivity"/>
-        <activity android:name=".AlarmActivity" android:launchMode="singleTop"/>
-
-
-
-
-
-        <activity android:name=".listview.CountDownRecyclerViewActivity"/>
-        <activity android:name=".listview.CountDownListActivity"/>
-
-        <receiver android:name=".receiver.TimerExpiredReceiver"/>
+        <receiver android:name=".receiver.TimerExpiredReceiver" />
 
 
     </application>

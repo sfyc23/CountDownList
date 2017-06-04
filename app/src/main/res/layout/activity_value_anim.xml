@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/item_toolbar" />
+    <include layout="@layout/layout_toolbar" />
     <TextView
         android:id="@+id/tv_countTime"
         style="@style/textView_show"
