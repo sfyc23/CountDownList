@@ -42,7 +42,8 @@ class SmsKotilnActivity : AppCompatActivity() {
 
     private fun initCountDown() {
         mObservable = Observable.interval(1, TimeUnit.SECONDS)
-                .take(MAX_COUNT_TIME)
+                //续 1s.
+                .take(MAX_COUNT_TIME + 1)
                 .map {
                     MAX_COUNT_TIME - it - 1
                 }

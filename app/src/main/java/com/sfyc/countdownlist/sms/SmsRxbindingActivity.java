@@ -86,7 +86,7 @@ public class SmsRxbindingActivity extends AppCompatActivity {
                         RxView.enabled(mBtnSendMsm).accept(false);
                         RxTextView.text(mBtnSendMsm).accept("剩余 " + MAX_COUNT_TIME + " 秒");
                         //在实际操作中可以在此发送获取网络的请求,,续1s
-                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io()).take(MAX_COUNT_TIME+1);
+                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io()).take(MAX_COUNT_TIME);
                     }
                 })
                 //将递增数字替换成递减的倒计时数字
