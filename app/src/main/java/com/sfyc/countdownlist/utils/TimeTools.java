@@ -31,7 +31,7 @@ public class TimeTools {
         if (minute < 10) {
             sb.append("0").append(minute).append(":");
         } else {
-            sb.append(hour).append(":");
+            sb.append(minute).append(":");
         }
         if (second < 10) {
             sb.append("0").append(second);
