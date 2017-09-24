@@ -8,9 +8,10 @@ import android.view.View;
 
 import com.sfyc.countdownlist.listview.CountDownListActivity;
 import com.sfyc.countdownlist.listview.CountDownRecyclerViewActivity;
-import com.sfyc.countdownlist.sms.SmsKotilnActivity;
+import com.sfyc.countdownlist.listview.CountDownRecyclerViewActivity2;
 import com.sfyc.countdownlist.sms.SmsCountDownButtonActivity;
 import com.sfyc.countdownlist.sms.SmsHandlerActivity;
+import com.sfyc.countdownlist.sms.SmsKotilnActivity;
 import com.sfyc.countdownlist.sms.SmsRxJavaActivity;
 import com.sfyc.countdownlist.sms.SmsRxbindingActivity;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_alarm,
             R.id.btn_list_list,
             R.id.btn_list_recycler,
+            R.id.btn_list_recycler02,
             R.id.btn_countTime_custom,
             R.id.btn_sms_countDownButton,
             R.id.btn_sms_handlerUtil,
@@ -78,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_list_recycler:
                 startActivity(new Intent(this, CountDownRecyclerViewActivity.class));
                 break;
-
+            case R.id.btn_list_recycler02:
+                startActivity(new Intent(this, CountDownRecyclerViewActivity2.class));
+                break;
             case R.id.btn_countTime_custom:
                 startActivity(new Intent(this, CountDownCustomActivity.class));
                 break;

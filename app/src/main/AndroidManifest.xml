@@ -35,6 +35,8 @@
             android:launchMode="singleTop" />
         <activity android:name=".listview.CountDownRecyclerViewActivity" />
         <activity android:name=".listview.CountDownListActivity" />
+        <activity android:name=".listview.CountDownRecyclerViewActivity2" />
+
 
         <receiver android:name=".receiver.TimerExpiredReceiver" />
 

@@ -71,6 +71,12 @@
             style="@style/textView_show"
             android:text="@string/title_recyclerView_countdown" />
 
+        <Button
+            android:id="@+id/btn_list_recycler02"
+            style="@style/textView_show"
+            android:text="@string/title_recyclerView_countdown" />
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

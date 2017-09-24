@@ -14,11 +14,11 @@ import java.util.concurrent.TimeUnit
 
 class SmsKotilnActivity : AppCompatActivity() {
 
-    internal var mObservable: Observable<Long>? = null
+    private var mObservable: Observable<Long>? = null
     private var mDisposable: Disposable? = null
     private var mConsumer: Consumer<Long>? = null
 
-    private val MAX_COUNT_TIME: Long = 10
+    private val MAX_COUNT_TIME: Long = 10L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
