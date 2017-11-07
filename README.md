@@ -5,20 +5,25 @@
 
 ![主菜单][1]
 
-简单用例：分别用 **Timer**、 **Hanlder**、 **CountDownTimer** 、**ValueAnimator**、 **RxJava**、**倒计时结束时发送通知** 实现倒计时。还有一部分实现 pause resume 功能。
+#### 1.简单用例：
+分别用 **Timer**、 **Hanlder**、 **CountDownTimer** 、**ValueAnimator**、 **RxJava**、**倒计时结束时发送通知** 实现倒计时。还有一部分实现 pause resume 功能。
 
 ![简单用例][2]
 
-倒计时列表。分别使用 ListView && RecylerView 两种方法实现。
+#### 2.倒计时列表。
+分别使用 ListView && RecylerView 两种方法实现。
 
 ![倒计时列表][3]
 
-其他，多种方式（自定义 CountDownButton，RxJava，工具类）实现短信倒计时 && 更多自定义功能的 CountDownTimer 类。
+#### 3.其他
+多种方式（自定义 CountDownButton，RxJava，工具类）实现短信倒计时 && 更多自定义功能的 CountDownTimer 类:
+
 1. 使用工具类一键实现；
 2. 自定义 Button 简洁实现；
 3. 用 RxJava 实现；
 4. 用 RxBinding与 RxJava2 的方法；
 5. 用 Kotiln & RxJava2 的方法实现。
+
 ![短信倒计时列表][4]
 
 
