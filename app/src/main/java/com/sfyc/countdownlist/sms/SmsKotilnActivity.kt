@@ -18,7 +18,11 @@ class SmsKotilnActivity : AppCompatActivity() {
     private var mDisposable: Disposable? = null
     private var mConsumer: Consumer<Long>? = null
 
-    private val MAX_COUNT_TIME: Long = 10L
+//    private val MAX_COUNT_TIME: Long = 10L
+
+    private val MAX_COUNT_TIME: Long by lazy<Long>{
+        10L
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +31,7 @@ class SmsKotilnActivity : AppCompatActivity() {
         toolbar.setTitle(R.string.title_sms_kotiln)
 
         btn_send_sms.setOnClickListener {
-            if (mObservable === null) {
+            if (mObservable == null) {
                 initCountDown()
             }
             mDisposable = mObservable?.subscribe(mConsumer)

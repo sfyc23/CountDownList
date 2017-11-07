@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -78,11 +79,13 @@ public class SmsRxbindingActivity extends AppCompatActivity {
         mObservableCountTime = RxView.clicks(mBtnSendMsm)
                 //防止重复点击
                 .throttleFirst(MAX_COUNT_TIME, TimeUnit.SECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
                 //将点击事件转换成倒计时事件
                 .flatMap(new Function<Object, ObservableSource<Long>>() {
                     @Override
                     public ObservableSource<Long> apply(Object o) throws Exception {
                         //更新发送按钮的状态并初始化显现倒计时文字
+                        Log.d(TAG, "flatMap thread is : " + Thread.currentThread().getName());
                         RxView.enabled(mBtnSendMsm).accept(false);
                         RxTextView.text(mBtnSendMsm).accept("剩余 " + MAX_COUNT_TIME + " 秒");
                         //在实际操作中可以在此发送获取网络的请求,,续1s
@@ -93,6 +96,7 @@ public class SmsRxbindingActivity extends AppCompatActivity {
                 .map(new Function<Long, Long>() {
                     @Override
                     public Long apply(Long aLong) throws Exception {
+                        Log.d(TAG, "map thread is : " + Thread.currentThread().getName());
                         return MAX_COUNT_TIME - (aLong + 1);
                     }
                 })
@@ -102,6 +106,7 @@ public class SmsRxbindingActivity extends AppCompatActivity {
             @Override
             public void accept(Long aLong) throws Exception {
                 //当倒计时为 0 时，还原btn按钮
+                Log.d(TAG, "Observable thread is : " + Thread.currentThread().getName());
                 if (aLong == 0) {
                     RxView.enabled(mBtnSendMsm).accept(true);
                     RxTextView.text(mBtnSendMsm).accept("发送验证码");

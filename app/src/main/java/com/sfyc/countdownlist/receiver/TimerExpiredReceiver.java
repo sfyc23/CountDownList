@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 
 import com.sfyc.countdownlist.AlarmActivity;
 import com.sfyc.countdownlist.R;
+
+//import android.support.v7.app.NotificationCompat;
 
 /**
  * Author :leilei on 2017/3/27 1443.
@@ -23,7 +25,7 @@ public class TimerExpiredReceiver extends BroadcastReceiver {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, i, 0);
 
-        NotificationCompat.Builder b = new NotificationCompat.Builder(context);
+        NotificationCompat.Builder b = new NotificationCompat.Builder(context,null);
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         b.setSound(notification)
                 .setContentTitle(context.getString(R.string.timer_finished))
