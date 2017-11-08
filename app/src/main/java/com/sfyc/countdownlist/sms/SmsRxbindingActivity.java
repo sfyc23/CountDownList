@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -36,6 +39,7 @@ public class SmsRxbindingActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private TextView mBtnSendMsm;
     private Button mBtnClean;
+    private EditText mEtPhone;
 
     //最大倒计时长
     private static final long MAX_COUNT_TIME = 10;
@@ -56,7 +60,7 @@ public class SmsRxbindingActivity extends AppCompatActivity {
 
         mBtnSendMsm = (TextView) findViewById(R.id.btn_send_sms);
         mBtnClean = (Button) findViewById(R.id.btn_sms_submit);
-
+        mEtPhone = (EditText) findViewById(R.id.et_phone);
 
         //重置验证码按钮。
         RxView.clicks(mBtnClean).subscribe(new Consumer<Object>() {
@@ -75,37 +79,51 @@ public class SmsRxbindingActivity extends AppCompatActivity {
         });
 
 
-
         mObservableCountTime = RxView.clicks(mBtnSendMsm)
                 //防止重复点击
-                .throttleFirst(MAX_COUNT_TIME, TimeUnit.SECONDS)
+                .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
+                //判断手机号否为空
+                .flatMap(new Function<Object, ObservableSource<Boolean>>() {
+                    @Override
+                    public ObservableSource<Boolean> apply(Object o) throws Exception {
+                        String phone = mEtPhone.getText().toString();
+                        if (TextUtils.isEmpty(phone)) {
+                            Toast.makeText(mContext, "phone can not be empty", Toast.LENGTH_SHORT).show();
+                            return Observable.empty();
+                        }
+                        return Observable.just(true);
+                    }
+                })
                 //将点击事件转换成倒计时事件
                 .flatMap(new Function<Object, ObservableSource<Long>>() {
                     @Override
                     public ObservableSource<Long> apply(Object o) throws Exception {
                         //更新发送按钮的状态并初始化显现倒计时文字
-                        Log.d(TAG, "flatMap thread is : " + Thread.currentThread().getName());
                         RxView.enabled(mBtnSendMsm).accept(false);
                         RxTextView.text(mBtnSendMsm).accept("剩余 " + MAX_COUNT_TIME + " 秒");
+
                         //在实际操作中可以在此发送获取网络的请求,,续1s
-                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io()).take(MAX_COUNT_TIME);
+
+                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io())
+                                .take(MAX_COUNT_TIME)
+                                //将递增数字替换成递减的倒计时数字
+                                .map(new Function<Long, Long>() {
+                                    @Override
+                                    public Long apply(Long aLong) throws Exception {
+                                        Log.d(TAG, "map thread is : " + Thread.currentThread().getName());
+                                        return MAX_COUNT_TIME - (aLong + 1);
+                                    }
+                                });
                     }
                 })
-                //将递增数字替换成递减的倒计时数字
-                .map(new Function<Long, Long>() {
-                    @Override
-                    public Long apply(Long aLong) throws Exception {
-                        Log.d(TAG, "map thread is : " + Thread.currentThread().getName());
-                        return MAX_COUNT_TIME - (aLong + 1);
-                    }
-                })
+                //切换到 Android 的主线程。
                 .observeOn(AndroidSchedulers.mainThread());
 
         mConsumerCountTime = new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                //当倒计时为 0 时，还原btn按钮
+                //当倒计时为 0 时，还原 btn 按钮
                 Log.d(TAG, "Observable thread is : " + Thread.currentThread().getName());
                 if (aLong == 0) {
                     RxView.enabled(mBtnSendMsm).accept(true);
@@ -120,7 +138,6 @@ public class SmsRxbindingActivity extends AppCompatActivity {
         mDisposable = mObservableCountTime.subscribe(mConsumerCountTime);
 
     }
-
 
 
     @Override
