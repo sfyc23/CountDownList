@@ -22,7 +22,8 @@
 2. 自定义 Button 简洁实现；
 3. 用 RxJava 实现；
 4. 用 RxBinding与 RxJava2 的方法；
-5. 用 Kotiln & RxJava2 的方法实现。
+5. 用 Kotiln & RxJava2 的方法实现，
+6. 使用 Chronometer 方法使用单个倒计时。
 
 ![短信倒计时列表][4]
 

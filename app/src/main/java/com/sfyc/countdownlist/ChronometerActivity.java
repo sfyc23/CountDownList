@@ -17,8 +17,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Author :leilei on 2016/11/11 2300.
- * ValueAnimator 动画 实现 倒计时
+ * Author :leilei on 2018-6-29 0:40:13
+ * Chronometer 实现倒计时 不建议使用
  */
 public class ChronometerActivity extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class ChronometerActivity extends AppCompatActivity {
     private static final long MAX_TIME = 12 * 1000;
 
     @BindView(R.id.chronometer)
-    Chronometer chronometer;
+    Chronometer mChronometer;
 
     float mCurrentValue = 0;
 
@@ -41,19 +41,26 @@ public class ChronometerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chronometer);
         ButterKnife.bind(this);
         mContext = this;
-        toolbar.setTitle(R.string.title_valueAnimatior_user);
+        toolbar.setTitle(R.string.title_chronometer_user);
         initValueAnimator();
 
 
-//        mAnimator.start();
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        Log.e("TAG", SystemClock.elapsedRealtime() + "");
-        chronometer.start();
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+        mChronometer.setBase(SystemClock.elapsedRealtime() + MAX_TIME);
+
+        //这个方法 在 sdk -24 才可以使用，可以来说非常不适用了
+        mChronometer.setCountDown(true);
+        mChronometer.start();
+        mChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                Log.e("TAG",chronometer.getContentDescription().toString());
+                long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+                long second = time / 1000;
+                if (second == 0) {
+                    chronometer.stop();
+                }
+                Log.e("TAG", "相差时间：" + time);
+
             }
         });
     }
@@ -76,12 +83,13 @@ public class ChronometerActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_start:
-//                mAnimator.start();
-                chronometer.start();
+
+                mChronometer.setBase(SystemClock.elapsedRealtime() + MAX_TIME);
+                mChronometer.start();
                 break;
             case R.id.btn_cancel:
-//                mAnimator.cancel();
-                chronometer.stop();
+
+                mChronometer.stop();
                 break;
             case R.id.btn_pause:
 

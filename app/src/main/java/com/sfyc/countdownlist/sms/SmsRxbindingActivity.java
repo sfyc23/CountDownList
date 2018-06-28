@@ -29,6 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Author :leilei on 2017/5/1 23:43
  * 用RxbindingA 实现短信倒计时
+ * 400-8899-717
  */
 public class SmsRxbindingActivity extends AppCompatActivity {
     private static final String TAG = "SmsRxbindingActivity";

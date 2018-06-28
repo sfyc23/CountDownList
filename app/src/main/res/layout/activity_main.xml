@@ -47,7 +47,7 @@
             android:id="@+id/btn_chronomete"
             style="@style/textView_show"
             android:text="@string/title_chronometer_user"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
         <Button
             android:id="@+id/btn_alarm"
             style="@style/textView_show"
