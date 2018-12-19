@@ -28,7 +28,7 @@
 ![短信倒计时列表][4]
 
 
-  [1]: http://oihnadz1x.bkt.clouddn.com/countdown_menu.png?imageView2/3/w/360/h/640/interlace/1
-  [2]: http://oihnadz1x.bkt.clouddn.com/countTime_github_02?imageView2/3/w/360/h/640/interlace/1
-  [3]: http://oihnadz1x.bkt.clouddn.com/countdown_recylerview.png?imageView2/3/w/360/h/640/interlace/1
-  [4]: http://oihnadz1x.bkt.clouddn.com/countdown_sms.png?imageView2/3/w/360/h/640/interlace/1
+  [1]: http://cnd.sfyc23.xyz/countdown_menu.png?imageView2/3/w/360/h/640/interlace/1
+  [2]: http://cnd.sfyc23.xyz/countTime_github_02?imageView2/3/w/360/h/640/interlace/1
+  [3]: http://cnd.sfyc23.xyz/countdown_recylerview.png?imageView2/3/w/360/h/640/interlace/1
+  [4]: http://cnd.sfyc23.xyz/countdown_sms.png?imageView2/3/w/360/h/640/interlace/1
