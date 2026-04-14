@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_2xl">
+
+        <TextView
+            android:id="@+id/tv_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="01:00"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/timer_display_large"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:max="1000"
+            android:progress="1000"
+            app:indicatorColor="?attr/colorPrimary"
+            app:trackColor="?attr/colorSurfaceVariant"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/spacing_2xl">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_start"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:layout_weight="1"
+            android:text="@string/action_start"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pause"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:layout_weight="1"
+            android:text="@string/action_pause"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_resume"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:layout_weight="1"
+            android:text="@string/action_resume"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="@string/action_cancel"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button"
+            app:strokeColor="?attr/colorError" />
+
+    </LinearLayout>
+
+</LinearLayout>

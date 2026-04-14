@@ -2,6 +2,7 @@ package com.sfyc.countdownlist.utils;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -35,7 +36,7 @@ public class CountDownSmsUtil implements Runnable {
         this.showTextView = showTextView;
         this.countdownText = countdownText;
         this.remainingSeconds = remainingSeconds;
-        this.handler = new Handler();
+        this.handler = new Handler(Looper.getMainLooper());
 
     }
 

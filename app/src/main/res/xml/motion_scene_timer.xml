@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- ═══ 待机 → 运行中 ═══ -->
+    <Transition
+        app:constraintSetStart="@+id/state_idle"
+        app:constraintSetEnd="@+id/state_running"
+        app:duration="600">
+        <OnSwipe app:dragDirection="dragUp" />
+    </Transition>
+
+    <!-- ═══ 运行中 → 完成 ═══ -->
+    <Transition
+        app:constraintSetStart="@+id/state_running"
+        app:constraintSetEnd="@+id/state_finished"
+        app:duration="400" />
+
+    <!-- ═══ 待机状态：数字居中，进度环隐藏 ═══ -->
+    <ConstraintSet android:id="@+id/state_idle">
+        <Constraint android:id="@+id/tv_time">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <Transform android:scaleX="1.6" android:scaleY="1.6" />
+        </Constraint>
+        <Constraint android:id="@+id/progress_circular">
+            <Layout
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <PropertySet android:alpha="0" />
+        </Constraint>
+        <Constraint android:id="@+id/tv_status">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_time"
+                android:layout_marginTop="12dp" />
+            <PropertySet android:alpha="0" />
+        </Constraint>
+        <Constraint android:id="@+id/btn_action">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="80dp" />
+        </Constraint>
+        <Constraint android:id="@+id/tv_finished_overlay">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:alpha="0" android:visibility="gone" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!-- ═══ 运行中状态：数字移到顶部，进度环可见 ═══ -->
+    <ConstraintSet android:id="@+id/state_running">
+        <Constraint android:id="@+id/tv_time">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="32dp" />
+            <Transform android:scaleX="1.0" android:scaleY="1.0" />
+        </Constraint>
+        <Constraint android:id="@+id/progress_circular">
+            <Layout
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_time"
+                android:layout_marginTop="24dp" />
+            <PropertySet android:alpha="1" />
+        </Constraint>
+        <Constraint android:id="@+id/tv_status">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_circular"
+                android:layout_marginTop="16dp" />
+            <PropertySet android:alpha="1" />
+        </Constraint>
+        <Constraint android:id="@+id/btn_action">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="80dp" />
+        </Constraint>
+        <Constraint android:id="@+id/tv_finished_overlay">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:alpha="0" android:visibility="gone" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!-- ═══ 完成状态：全屏闪烁覆盖层 ═══ -->
+    <ConstraintSet android:id="@+id/state_finished">
+        <Constraint android:id="@+id/tv_time">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <Transform android:scaleX="2.0" android:scaleY="2.0" />
+        </Constraint>
+        <Constraint android:id="@+id/progress_circular">
+            <Layout
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <PropertySet android:alpha="0" />
+        </Constraint>
+        <Constraint android:id="@+id/tv_status">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_time"
+                android:layout_marginTop="12dp" />
+            <PropertySet android:alpha="1" />
+        </Constraint>
+        <Constraint android:id="@+id/btn_action">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="80dp" />
+        </Constraint>
+        <Constraint android:id="@+id/tv_finished_overlay">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:alpha="0.3" android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
+</MotionScene>

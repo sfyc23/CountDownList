@@ -2,21 +2,18 @@ package com.sfyc.countdownlist.sms;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.sfyc.countdownlist.R;
 import com.sfyc.countdownlist.utils.CountDownSmsUtil;
 
-/**
- * Author :leilei on 2017/2/8 1806.
- * CountDownUtils 短信倒计时使用
- */
 public class SmsHandlerActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SmsActivity";
     private CountDownSmsUtil countDown;
@@ -32,28 +29,26 @@ public class SmsHandlerActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_sms);
         mContext = this;
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_sms_hanlderUtil);
 
-        mSendMsmBtn = (Button) findViewById(R.id.btn_send_sms);
+        mSendMsmBtn = findViewById(R.id.btn_send_sms);
         mSendMsmBtn.setOnClickListener(this);
-//        countDown = new CountDownSmsUtil(this, mSendMsmTv, "%s秒");
-        countDown = new CountDownSmsUtil(this, mSendMsmBtn, "%s秒", 10);
-//        countDown.start();
+        countDown = new CountDownSmsUtil(this, mSendMsmBtn, "%ss", 10);
         countDown.setCountdownListener(new CountDownSmsUtil.CountdownListener() {
             @Override
             public void onStart() {
-                Toast.makeText(mContext, "已发送短信", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "SMS sent", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFinish() {
-                Log.e(TAG, "结束");
+                Log.e(TAG, "finished");
             }
 
             @Override
             public void onUpdate(int currentRemainingSeconds) {
-                Log.i(TAG, "" + currentRemainingSeconds);
+                Log.i(TAG, String.valueOf(currentRemainingSeconds));
             }
         });
         findViewById(R.id.btn_sms_submit).setOnClickListener(this);
@@ -61,17 +56,11 @@ public class SmsHandlerActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_send_sms:
-                countDown.start();
-                break;
-            case R.id.btn_sms_submit:
-                if (countDown != null) {
-                    countDown.onDestroy();
-                }
-                break;
-            default:
-                break;
+        int viewId = v.getId();
+        if (viewId == R.id.btn_send_sms) {
+            countDown.start();
+        } else if (viewId == R.id.btn_sms_submit && countDown != null) {
+            countDown.onDestroy();
         }
     }
 

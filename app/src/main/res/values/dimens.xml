@@ -1,5 +1,31 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Default screen margins -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Spacing tokens -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">24dp</dimen>
+    <dimen name="spacing_2xl">32dp</dimen>
+    <dimen name="spacing_3xl">48dp</dimen>
+
+    <!-- Corner radius -->
+    <dimen name="corner_card">16dp</dimen>
+    <dimen name="corner_button">12dp</dimen>
+    <dimen name="corner_chip">8dp</dimen>
+    <dimen name="corner_sheet">28dp</dimen>
+
+    <!-- Timer display sizes -->
+    <dimen name="timer_display_large">56sp</dimen>
+    <dimen name="timer_display_medium">44sp</dimen>
+    <dimen name="timer_display_small">36sp</dimen>
+    <dimen name="timer_list_item">16sp</dimen>
+
+    <!-- Circular progress -->
+    <dimen name="circular_progress_size_large">240dp</dimen>
+    <dimen name="circular_progress_size_medium">180dp</dimen>
+    <dimen name="circular_progress_stroke_width">6dp</dimen>
 </resources>

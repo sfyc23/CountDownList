@@ -1,75 +1,75 @@
 package com.sfyc.countdownlist.sms
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.sfyc.countdownlist.R
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_sms.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.Consumer
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class SmsKotilnActivity : AppCompatActivity() {
 
-    private var mObservable: Observable<Long>? = null
-    private var mDisposable: Disposable? = null
-    private var mConsumer: Consumer<Long>? = null
+    private lateinit var toolbar: Toolbar
+    private lateinit var sendSmsButton: Button
+    private lateinit var submitButton: Button
 
-//    private val MAX_COUNT_TIME: Long = 10L
+    private var observable: Observable<Long>? = null
+    private var disposable: Disposable? = null
+    private var consumer: Consumer<Long>? = null
 
-    private val MAX_COUNT_TIME: Long by lazy<Long>{
-        10L
-    }
+    private val maxCountTime = 10L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sms)
 
+        toolbar = findViewById(R.id.toolbar)
+        sendSmsButton = findViewById(R.id.btn_send_sms)
+        submitButton = findViewById(R.id.btn_sms_submit)
+
         toolbar.setTitle(R.string.title_sms_kotiln)
 
-        btn_send_sms.setOnClickListener {
-            if (mObservable == null) {
+        sendSmsButton.setOnClickListener {
+            if (observable == null) {
                 initCountDown()
             }
-            mDisposable = mObservable?.subscribe(mConsumer)
+            consumer?.let { currentConsumer ->
+                disposable = observable?.subscribe(currentConsumer)
+            }
         }
-        btn_sms_submit.setOnClickListener {
-            mDisposable?.dispose()
-            btn_send_sms.isEnabled = true
-            btn_send_sms.setText(R.string.sms_send_code)
+        submitButton.setOnClickListener {
+            disposable?.dispose()
+            sendSmsButton.isEnabled = true
+            sendSmsButton.setText(R.string.sms_send_code)
         }
-
     }
 
     private fun initCountDown() {
-        mObservable = Observable.interval(1, TimeUnit.SECONDS)
-                //续 1s.
-                .take(MAX_COUNT_TIME + 1)
-                .map {
-                    MAX_COUNT_TIME - it - 1
-                }
-                .subscribeOn(Schedulers.computation())
-                .doOnSubscribe {
-                    btn_send_sms.isEnabled = false;
-                    btn_send_sms.text = "剩余 ${MAX_COUNT_TIME} s"
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    btn_send_sms.isEnabled = true;
-                    btn_send_sms.setText(R.string.sms_send_code)
-                }
-        mConsumer = Consumer<Long> {
-            btn_send_sms.text = "剩余 ${it} s"
+        observable = Observable.interval(1, TimeUnit.SECONDS)
+            .take(maxCountTime + 1)
+            .map { maxCountTime - it - 1 }
+            .subscribeOn(Schedulers.computation())
+            .doOnSubscribe {
+                sendSmsButton.isEnabled = false
+                sendSmsButton.text = "${maxCountTime}s"
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnComplete {
+                sendSmsButton.isEnabled = true
+                sendSmsButton.setText(R.string.sms_send_code)
+            }
+        consumer = Consumer<Long> { remaining ->
+            sendSmsButton.text = "${remaining}s"
         }
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mDisposable?.dispose()
+        disposable?.dispose()
     }
 }
-

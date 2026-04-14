@@ -1,11 +1,20 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_primary</item>
+        <item name="colorOnPrimary">@color/md_on_primary</item>
+        <item name="colorPrimaryContainer">@color/md_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/md_on_primary_container</item>
+        <item name="colorSecondary">@color/md_secondary</item>
+        <item name="colorError">@color/md_error</item>
+        <item name="android:colorBackground">@color/md_surface</item>
+        <item name="colorSurface">@color/md_surface</item>
+        <item name="colorOnSurface">@color/md_on_surface</item>
+        <item name="colorSurfaceVariant">@color/md_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/md_on_surface_variant</item>
+        <item name="colorOutline">@color/md_outline</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="textView_show">
@@ -15,13 +24,41 @@
         <item name="android:minHeight">48dp</item>
         <item name="android:paddingLeft">12dp</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/md_on_surface</item>
         <item name="android:textSize">13sp</item>
         <item name="android:layout_marginTop">6dp</item>
         <item name="android:layout_marginLeft">12dp</item>
         <item name="android:layout_marginRight">12dp</item>
     </style>
 
+    <style name="Widget.CountDown.DemoEntry" parent="Widget.Material3.Button.TextButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">0dp</item>
+    </style>
 
+    <style name="Widget.CountDown.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="titleTextColor">@color/md_on_surface</item>
+    </style>
+
+    <style name="TextAppearance.CountDown.TimerDisplay" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/timer_display_large</item>
+        <item name="android:textColor">@color/md_on_surface</item>
+    </style>
+
+    <style name="ShapeAppearance.CountDown.TextInput" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_button</item>
+    </style>
 
 </resources>

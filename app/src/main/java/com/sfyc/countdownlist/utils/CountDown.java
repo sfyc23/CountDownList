@@ -1,6 +1,7 @@
 package com.sfyc.countdownlist.utils;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 
@@ -106,7 +107,7 @@ public class CountDown {
     }
 
 
-    private Handler mHandler = new Handler() {
+    private final Handler mHandler = new Handler(Looper.getMainLooper()) {
 
         @Override
         public void handleMessage(Message msg) {

@@ -3,19 +3,16 @@ package com.sfyc.countdownlist;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.sfyc.countdownlist.utils.TimeTools;
 
-/**
- * Author :leilei on 2016/11/11 2300.
- */
 public class CountDownSimpleActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     private Context mContext;
     private CountDownTimer mCountDownTimer;
@@ -32,14 +29,14 @@ public class CountDownSimpleActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common);
         mContext = this;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_countdown_user);
 
         findViewById(R.id.btn_start).setOnClickListener(this);
         findViewById(R.id.btn_pause).setOnClickListener(this);
         findViewById(R.id.btn_cancel).setOnClickListener(this);
         findViewById(R.id.btn_resume).setOnClickListener(this);
-        mTimerTv = (TextView) findViewById(R.id.tv_countTime);
+        mTimerTv = findViewById(R.id.tv_countTime);
 
         initCountDownTimer(MAX_TIME);
         mCountDownTimer.start();
@@ -54,41 +51,39 @@ public class CountDownSimpleActivity extends AppCompatActivity implements View.O
                 isPause = false;
             }
 
+            @Override
             public void onFinish() {
-                mTimerTv.setText("完成!");
+                mTimerTv.setText("Done!");
             }
         };
     }
 
-
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_start:
-                isPause = false;
-                mCountDownTimer.start();
-                break;
-            case R.id.btn_cancel:
-                isPause = false;
+        int viewId = view.getId();
+        if (viewId == R.id.btn_start) {
+            isPause = false;
+            mCountDownTimer.start();
+        } else if (viewId == R.id.btn_cancel) {
+            isPause = false;
+            mCountDownTimer.cancel();
+        } else if (viewId == R.id.btn_pause) {
+            if (!isPause) {
+                isPause = true;
                 mCountDownTimer.cancel();
-                break;
-            case R.id.btn_pause:
-                if (!isPause) {
-                    isPause = true;
-                    mCountDownTimer.cancel();
-                }
-                break;
-            case R.id.btn_resume:
-                if (curTime != 0 && isPause) {
-                    //将上次当前剩余时间作为新的时长
-                    initCountDownTimer(curTime);
-                    mCountDownTimer.start();
-                    isPause = false;
-                }
-                break;
-            default:
-                break;
+            }
+        } else if (viewId == R.id.btn_resume && curTime != 0 && isPause) {
+            initCountDownTimer(curTime);
+            mCountDownTimer.start();
+            isPause = false;
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+    }
 }

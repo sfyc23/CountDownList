@@ -2,53 +2,42 @@ package com.sfyc.countdownlist.sms;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.sfyc.countdownlist.R;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
-/**
- * Author :leilei on 2017/5/1 23:43
- * 用RxbindingA 实现短信倒计时
- * 400-8899-717
- */
 public class SmsRxbindingActivity extends AppCompatActivity {
     private static final String TAG = "SmsRxbindingActivity";
 
     private Context mContext;
-
-
     private Toolbar mToolbar;
     private TextView mBtnSendMsm;
     private Button mBtnClean;
     private EditText mEtPhone;
 
-    //最大倒计时长
     private static final long MAX_COUNT_TIME = 10;
 
     private Observable<Long> mObservableCountTime;
     private Consumer<Long> mConsumerCountTime;
-
-    //用于主动取消订阅倒计时，或者退出当前页面。
     private Disposable mDisposable;
 
     @Override
@@ -56,98 +45,95 @@ public class SmsRxbindingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
         mContext = this;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_sms_rxbinding);
 
-        mBtnSendMsm = (TextView) findViewById(R.id.btn_send_sms);
-        mBtnClean = (Button) findViewById(R.id.btn_sms_submit);
-        mEtPhone = (EditText) findViewById(R.id.et_phone);
+        mBtnSendMsm = findViewById(R.id.btn_send_sms);
+        mBtnClean = findViewById(R.id.btn_sms_submit);
+        mEtPhone = findViewById(R.id.et_phone);
 
-        //重置验证码按钮。
-        RxView.clicks(mBtnClean).subscribe(new Consumer<Object>() {
+        mBtnSendMsm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void accept(Object o) throws Exception {
-                if (mDisposable != null && !mDisposable.isDisposed()) {
-                    //停止倒计时
-                    mDisposable.dispose();
-                    //重新订阅
-                    mDisposable = mObservableCountTime.subscribe(mConsumerCountTime);
-                    //按钮可点击
-                    RxView.enabled(mBtnSendMsm).accept(true);
-                    RxTextView.text(mBtnSendMsm).accept("发送验证码");
-                }
+            public void onClick(View v) {
+                startCountdown();
+            }
+        });
+        mBtnClean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetCountdown();
             }
         });
 
+        initCountDownObservable();
+    }
 
-        mObservableCountTime = RxView.clicks(mBtnSendMsm)
-                //防止重复点击
-                .throttleFirst(1, TimeUnit.SECONDS)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                //判断手机号否为空
-                .flatMap(new Function<Object, ObservableSource<Boolean>>() {
+    private void initCountDownObservable() {
+        mObservableCountTime = Observable.just(true)
+                .flatMap(new Function<Boolean, Observable<Long>>() {
                     @Override
-                    public ObservableSource<Boolean> apply(Object o) throws Exception {
-                        String phone = mEtPhone.getText().toString();
-                        if (TextUtils.isEmpty(phone)) {
+                    public Observable<Long> apply(Boolean ignored) {
+                        if (TextUtils.isEmpty(mEtPhone.getText().toString())) {
                             Toast.makeText(mContext, "phone can not be empty", Toast.LENGTH_SHORT).show();
                             return Observable.empty();
                         }
-                        return Observable.just(true);
-                    }
-                })
-                //将点击事件转换成倒计时事件
-                .flatMap(new Function<Object, ObservableSource<Long>>() {
-                    @Override
-                    public ObservableSource<Long> apply(Object o) throws Exception {
-                        //更新发送按钮的状态并初始化显现倒计时文字
-                        RxView.enabled(mBtnSendMsm).accept(false);
-                        RxTextView.text(mBtnSendMsm).accept("剩余 " + MAX_COUNT_TIME + " 秒");
-
-                        //在实际操作中可以在此发送获取网络的请求,,续1s
-
-                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.io())
+                        mBtnSendMsm.setEnabled(false);
+                        mBtnSendMsm.setText(MAX_COUNT_TIME + "s");
+                        return Observable.interval(1, TimeUnit.SECONDS, Schedulers.computation())
                                 .take(MAX_COUNT_TIME)
-                                //将递增数字替换成递减的倒计时数字
                                 .map(new Function<Long, Long>() {
                                     @Override
-                                    public Long apply(Long aLong) throws Exception {
+                                    public Long apply(Long aLong) {
                                         Log.d(TAG, "map thread is : " + Thread.currentThread().getName());
                                         return MAX_COUNT_TIME - (aLong + 1);
                                     }
                                 });
                     }
                 })
-                //切换到 Android 的主线程。
                 .observeOn(AndroidSchedulers.mainThread());
 
         mConsumerCountTime = new Consumer<Long>() {
             @Override
-            public void accept(Long aLong) throws Exception {
-                //当倒计时为 0 时，还原 btn 按钮
+            public void accept(Long aLong) {
                 Log.d(TAG, "Observable thread is : " + Thread.currentThread().getName());
                 if (aLong == 0) {
-                    RxView.enabled(mBtnSendMsm).accept(true);
-                    RxTextView.text(mBtnSendMsm).accept("发送验证码");
+                    resetButtonState();
                 } else {
-                    RxTextView.text(mBtnSendMsm).accept("剩余 " + aLong + " 秒");
+                    mBtnSendMsm.setText(aLong + "s");
                 }
             }
         };
-
-        //订阅
-        mDisposable = mObservableCountTime.subscribe(mConsumerCountTime);
-
     }
 
+    private void startCountdown() {
+        resetCountdown();
+        mDisposable = mObservableCountTime.subscribe(
+                mConsumerCountTime,
+                new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) {
+                        Log.e(TAG, "countdown failed", throwable);
+                        resetButtonState();
+                    }
+                }
+        );
+    }
+
+    private void resetCountdown() {
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
+        resetButtonState();
+    }
+
+    private void resetButtonState() {
+        mBtnSendMsm.setEnabled(true);
+        mBtnSendMsm.setText(R.string.sms_send_code);
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mDisposable != null) {
-            mDisposable.dispose();
-        }
+        resetCountdown();
     }
-
-
 }

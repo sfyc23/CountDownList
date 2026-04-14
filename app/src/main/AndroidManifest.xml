@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sfyc.countdownlist">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +12,9 @@
         android:theme="@style/AppTheme">
 
         <!-- MainActivity,listview.CountDownRecyclerViewActivity -->
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,10 +40,30 @@
         <activity android:name=".listview.CountDownRecyclerViewActivity" />
         <activity android:name=".listview.CountDownListActivity" />
         <activity android:name=".listview.CountDownRecyclerViewActivity2" />
+        <activity android:name=".compose.ComposeMainActivity" />
+        <activity android:name=".coroutine.CoroutineSingleActivity" />
+        <activity android:name=".coroutine.CoroutineListActivity" />
+        <activity android:name=".coroutine.CoroutineSmsActivity" />
+        <activity android:name=".flow.FlowSingleActivity" />
+        <activity android:name=".flow.FlowListActivity" />
+        <activity android:name=".MotionTimerActivity" />
+        <receiver
+            android:name=".receiver.TimerExpiredReceiver"
+            android:exported="false" />
+        <service
+            android:name=".service.TimerForegroundService"
+            android:exported="false" />
 
-
-        <receiver android:name=".receiver.TimerExpiredReceiver" />
-
+        <receiver
+            android:name=".widget.TimerWidgetReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/timer_widget_info" />
+        </receiver>
 
     </application>
 

@@ -1,125 +1,353 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_name"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="24dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/layout_toolbar" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="简单的倒计时使用" />
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/spacing_lg"
+            android:paddingTop="@dimen/spacing_sm"
+            android:paddingBottom="@dimen/spacing_3xl">
 
-        <Button
-            android:id="@+id/btn_timer"
-            style="@style/textView_show"
-            android:text="@string/title_timer_user" />
+            <!-- ═══ 基础计时机制 ═══ -->
 
-        <Button
-            android:id="@+id/btn_hanlder"
-            style="@style/textView_show"
-            android:text="@string/title_hanlder_user" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="@string/category_basic"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurfaceVariant" />
 
-        <Button
-            android:id="@+id/btn_countTime"
-            style="@style/textView_show"
-            android:text="@string/title_countdown_user" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:cardCornerRadius="@dimen/corner_card"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp">
 
-        <Button
-            android:id="@+id/btn_valueAnimator"
-            style="@style/textView_show"
-            android:text="@string/title_valueAnimatior_user" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="?android:attr/listDivider"
+                    android:showDividers="middle">
 
-        <Button
-            android:id="@+id/btn_rxJava"
-            style="@style/textView_show"
-            android:text="@string/title_rxjava_user" />
+                    <Button
+                        android:id="@+id/btn_timer"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_timer_user" />
 
-        <Button
-            android:id="@+id/btn_chronomete"
-            style="@style/textView_show"
-            android:text="@string/title_chronometer_user"
-            android:visibility="visible"/>
-        <Button
-            android:id="@+id/btn_alarm"
-            style="@style/textView_show"
-            android:text="@string/title_alarm_user"
-            />
+                    <Button
+                        android:id="@+id/btn_hanlder"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_hanlder_user" />
 
+                    <Button
+                        android:id="@+id/btn_countTime"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_countdown_user" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="列表倒计时" />
+                    <Button
+                        android:id="@+id/btn_countTime_custom"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_countTime_custom" />
 
-        <Button
-            android:id="@+id/btn_list_list"
-            style="@style/textView_show"
-            android:text="@string/title_list_view_countdown" />
+                    <Button
+                        android:id="@+id/btn_valueAnimator"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_valueAnimatior_user" />
 
-        <Button
-            android:id="@+id/btn_list_recycler"
-            style="@style/textView_show"
-            android:text="@string/title_recyclerView_countdown" />
+                    <Button
+                        android:id="@+id/btn_rxJava"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_rxjava_user" />
 
-        <Button
-            android:id="@+id/btn_list_recycler02"
-            style="@style/textView_show"
-            android:text="@string/title_recyclerView_countdown" />
+                    <Button
+                        android:id="@+id/btn_chronomete"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_chronometer_user" />
 
+                    <Button
+                        android:id="@+id/btn_alarm"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_alarm_user" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="发送短信倒计时" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <Button
-            android:id="@+id/btn_sms_handlerUtil"
-            style="@style/textView_show"
-            android:text="@string/title_sms_hanlderUtil" />
+            <!-- ═══ 列表倒计时 ═══ -->
 
-        <Button
-            android:id="@+id/btn_sms_rxJava"
-            style="@style/textView_show"
-            android:text="@string/title_sms_rxjava" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="@string/category_list"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurfaceVariant" />
 
-        <Button
-            android:id="@+id/btn_sms_rxbinding"
-            style="@style/textView_show"
-            android:text="@string/title_sms_rxbinding" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:cardCornerRadius="@dimen/corner_card"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp">
 
-        <Button
-            android:id="@+id/btn_sms_kotiln"
-            style="@style/textView_show"
-            android:text="@string/title_sms_kotiln" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="?android:attr/listDivider"
+                    android:showDividers="middle">
 
-        <Button
-            android:id="@+id/btn_sms_countDownButton"
-            style="@style/textView_show"
-            android:text="@string/title_sms_countDownButton" />
+                    <Button
+                        android:id="@+id/btn_list_list"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_list_view_countdown" />
 
+                    <Button
+                        android:id="@+id/btn_list_recycler"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="RecyclerView + SparseArray" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="其他的功能" />
+                    <Button
+                        android:id="@+id/btn_list_recycler02"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="RecyclerView + SwipeRefresh" />
 
-        <Button
-            android:id="@+id/btn_countTime_custom"
-            style="@style/textView_show"
-            android:text="@string/title_countTime_custom" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
+            <!-- ═══ 短信验证码倒计时 ═══ -->
 
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="@string/category_sms"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:cardCornerRadius="@dimen/corner_card"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="?android:attr/listDivider"
+                    android:showDividers="middle">
+
+                    <Button
+                        android:id="@+id/btn_sms_handlerUtil"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_sms_hanlderUtil" />
+
+                    <Button
+                        android:id="@+id/btn_sms_rxJava"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_sms_rxjava" />
+
+                    <Button
+                        android:id="@+id/btn_sms_rxbinding"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_sms_rxbinding" />
+
+                    <Button
+                        android:id="@+id/btn_sms_kotiln"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_sms_kotiln" />
+
+                    <Button
+                        android:id="@+id/btn_sms_countDownButton"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="@string/title_sms_countDownButton" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ 协程 + XML ═══ -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="@string/category_coroutine"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorPrimary" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:cardCornerRadius="@dimen/corner_card"
+                app:cardElevation="1dp"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="?android:attr/listDivider"
+                    android:showDividers="middle">
+
+                    <Button
+                        android:id="@+id/btn_coroutine_single"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="协程 单个倒计时"
+                        android:textColor="?attr/colorPrimary" />
+
+                    <Button
+                        android:id="@+id/btn_coroutine_list"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="协程 多列表倒计时"
+                        android:textColor="?attr/colorPrimary" />
+
+                    <Button
+                        android:id="@+id/btn_coroutine_sms"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="协程 短信倒计时"
+                        android:textColor="?attr/colorPrimary" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ Flow + XML ═══ -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="Flow + XML"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorTertiary" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:cardCornerRadius="@dimen/corner_card"
+                app:cardElevation="1dp"
+                app:strokeColor="?attr/colorTertiary"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="?android:attr/listDivider"
+                    android:showDividers="middle">
+
+                    <Button
+                        android:id="@+id/btn_flow_single"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="Flow 单个倒计时"
+                        android:textColor="?attr/colorTertiary" />
+
+                    <Button
+                        android:id="@+id/btn_flow_list"
+                        style="@style/Widget.CountDown.DemoEntry"
+                        android:text="Flow 列表倒计时"
+                        android:textColor="?attr/colorTertiary" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ 动画 + MotionLayout ═══ -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="动画方案"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorError" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:cardCornerRadius="@dimen/corner_card"
+                app:cardElevation="1dp"
+                app:strokeColor="?attr/colorError"
+                app:strokeWidth="1dp">
+
+                <Button
+                    android:id="@+id/btn_motion_timer"
+                    style="@style/Widget.CountDown.DemoEntry"
+                    android:text="MotionLayout 动画倒计时"
+                    android:textColor="?attr/colorError" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ Compose UI ═══ -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="@string/category_compose"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorSecondary" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:cardCornerRadius="@dimen/corner_card"
+                app:cardElevation="2dp"
+                app:strokeColor="?attr/colorSecondary"
+                app:strokeWidth="1dp">
+
+                <Button
+                    android:id="@+id/btn_compose"
+                    style="@style/Widget.CountDown.DemoEntry"
+                    android:text="Compose 倒计时合集 (5 Tab)"
+                    android:textColor="?attr/colorSecondary"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

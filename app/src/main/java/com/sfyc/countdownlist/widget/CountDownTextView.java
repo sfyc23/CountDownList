@@ -3,11 +3,12 @@ package com.sfyc.countdownlist.widget;
 
 import android.content.Context;
 import android.os.SystemClock;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.sfyc.countdownlist.utils.CountDown;
 
@@ -157,15 +158,12 @@ public class CountDownTextView extends AppCompatTextView {
         }
     }
 
-    private String getFormatTime(long now){
-//        long day = ElapsedTimeUtil.MILLISECONDS.toDays(now);
-//        long hour = ElapsedTimeUtil.MILLISECONDS.toHours(now);
-//        long minute = ElapsedTimeUtil.MILLISECONDS.toMinutes(now);
-//        long seconds = ElapsedTimeUtil.MILLISECONDS.toSeconds(now);
-        long day = 1;
-        long hour = 1;
-        long minute = 1;
-        long seconds = 1;
+    private String getFormatTime(long millis){
+        long totalSeconds = millis / 1000;
+        long day = totalSeconds / 86400;
+        long hour = (totalSeconds % 86400) / 3600;
+        long minute = (totalSeconds % 3600) / 60;
+        long seconds = totalSeconds % 60;
 
         mRecycle.setLength(0);
         Formatter f = new Formatter(mRecycle, Locale.getDefault());
@@ -175,18 +173,17 @@ public class CountDownTextView extends AppCompatTextView {
                 text = f.format(TIME_FORMAT_D_H_M_S, day, hour, minute, seconds).toString();
                 break;
             case TIME_SHOW_H_M_S:
-                text = f.format(TIME_FORMAT_H_M_S, hour, minute, seconds).toString();
+                // 天数折算进小时
+                text = f.format(TIME_FORMAT_H_M_S, day * 24 + hour, minute, seconds).toString();
                 break;
-
             case TIME_SHOW_M_S:
-                text =  f.format(TIME_FORMAT_M_S, minute, seconds).toString();
+                text = f.format(TIME_FORMAT_M_S, minute, seconds).toString();
                 break;
-
             case TIME_SHOW_S:
-                text =  f.format(TIME_FORMAT_S, seconds).toString();
+                text = f.format(TIME_FORMAT_S, seconds).toString();
                 break;
             default:
-                text = f.format(TIME_FORMAT_H_M_S, seconds).toString();
+                text = f.format(TIME_FORMAT_H_M_S, day * 24 + hour, minute, seconds).toString();
                 break;
         }
 

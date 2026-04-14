@@ -3,22 +3,21 @@ package com.sfyc.countdownlist;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.sfyc.countdownlist.utils.TimeTools;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Author :leilei on 2017/2/8 0714.
- */
 public class TimerSimpleActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int WHAT = 101;
     private Context mContext;
@@ -32,29 +31,40 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
     private boolean isPause = false;
 
     private Toolbar mToolbar;
-    //    private int
+
+    private final Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == WHAT) {
+                long remain = (long) msg.obj;
+                mTimerTv.setText(TimeTools.getCountTimeByLong(remain));
+                if (remain <= 0 && mTimer != null) {
+                    mTimer.cancel();
+                    curTime = 0;
+                    Toast.makeText(mContext, "Finished", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common);
         mContext = this;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_timer_user);
 
         findViewById(R.id.btn_start).setOnClickListener(this);
         findViewById(R.id.btn_pause).setOnClickListener(this);
         findViewById(R.id.btn_cancel).setOnClickListener(this);
         findViewById(R.id.btn_resume).setOnClickListener(this);
-        mTimerTv = (TextView) findViewById(R.id.tv_countTime);
+        mTimerTv = findViewById(R.id.tv_countTime);
 
         initTimer();
-        // 参数：0，延时0秒后执行;1000，每隔1秒执行1次task。
         mTimer.schedule(mTimerTask, 0, 1000);
     }
 
-    /**
-     * 初始化Timer
-     */
     public void initTimer() {
         mTimerTask = new TimerTask() {
             @Override
@@ -64,7 +74,7 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
                 } else {
                     curTime -= 1000;
                 }
-                Message message = new Message();
+                Message message = Message.obtain();
                 message.what = WHAT;
                 message.obj = curTime;
                 mHandler.sendMessage(message);
@@ -73,9 +83,6 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
         mTimer = new Timer();
     }
 
-    /**
-     * destory上次使用的
-     */
     public void destroyTimer() {
         if (mTimer != null) {
             mTimer.cancel();
@@ -87,78 +94,37 @@ public class TimerSimpleActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    //    start,cancel,pause,resume
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_start:
-
-                destroyTimer();
-                initTimer();
-                isPause = false;
-                mTimer.schedule(mTimerTask, 0, 1000);
-
-                break;
-            case R.id.btn_cancel:
-                //如果 curTime == 0，则不需要执行此操
-                if (curTime == 0) {
-                    break;
-                }
+        int viewId = view.getId();
+        if (viewId == R.id.btn_start) {
+            destroyTimer();
+            initTimer();
+            isPause = false;
+            mTimer.schedule(mTimerTask, 0, 1000);
+        } else if (viewId == R.id.btn_cancel) {
+            if (curTime != 0) {
                 curTime = 0;
                 isPause = false;
                 mTimer.cancel();
-                break;
-            case R.id.btn_pause:
-                //如果 curTime == 0，则不需要执行此操
-                if (curTime == 0) {
-                    break;
-                }
-                if (!isPause) {
-                    isPause = true;
-                    mTimer.cancel();
-                }
-                break;
-
-            case R.id.btn_resume:
-                //已经结束或者还没有开始时。或者按了暂停标记。
-                if (curTime != 0 && isPause) {
-                    destroyTimer();
-                    initTimer();
-                    mTimer.schedule(mTimerTask, 0, 1000);
-                    isPause = false;
-                }
-                break;
-            default:
-                break;
+            }
+        } else if (viewId == R.id.btn_pause) {
+            if (curTime != 0 && !isPause) {
+                isPause = true;
+                mTimer.cancel();
+            }
+        } else if (viewId == R.id.btn_resume && curTime != 0 && isPause) {
+            destroyTimer();
+            initTimer();
+            mTimer.schedule(mTimerTask, 0, 1000);
+            isPause = false;
         }
     }
-
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case WHAT:
-                    long sRecLen = (long) msg.obj;
-                    //毫秒换成00:00:00格式的方式，自己写的。
-                    mTimerTv.setText(TimeTools.getCountTimeByLong(sRecLen));
-                    if (sRecLen <= 0) {
-                        mTimer.cancel();
-                        curTime = 0;
-                        Toast.makeText(mContext, "结束", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-        }
-    };
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         destroyTimer();
-        if (mHandler != null) {
-            mHandler.removeMessages(WHAT);
-            mHandler = null;
-        }
+        mHandler.removeMessages(WHAT);
     }
 }

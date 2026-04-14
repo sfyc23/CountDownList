@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#4F46E5</color>
+    <color name="colorPrimaryDark">#3730A3</color>
+    <color name="colorAccent">#EC4899</color>
+
+    <!-- M3 Semantic Colors -->
+    <color name="md_primary">#4F46E5</color>
+    <color name="md_on_primary">#FFFFFF</color>
+    <color name="md_primary_container">#E0E7FF</color>
+    <color name="md_on_primary_container">#312E81</color>
+    <color name="md_secondary">#EC4899</color>
+    <color name="md_tertiary">#10B981</color>
+    <color name="md_error">#EF4444</color>
+    <color name="md_surface">#FAFAFA</color>
+    <color name="md_on_surface">#1C1917</color>
+    <color name="md_surface_variant">#F5F5F4</color>
+    <color name="md_on_surface_variant">#57534E</color>
+    <color name="md_outline">#D6D3D1</color>
+
+    <!-- Timer Semantic Colors -->
+    <color name="timer_running">#4F46E5</color>
+    <color name="timer_paused">#F59E0B</color>
+    <color name="timer_warning">#EF4444</color>
+    <color name="timer_finished">#57534E</color>
+    <color name="stopwatch_running">#10B981</color>
 
     <!-- Red -->
     <color name="material_red_50">#fde0dc</color>

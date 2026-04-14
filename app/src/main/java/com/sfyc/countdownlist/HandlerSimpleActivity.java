@@ -3,19 +3,17 @@ package com.sfyc.countdownlist;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.sfyc.countdownlist.utils.TimeTools;
 
-/**
- * Author :leilei on 2017/2/8 1642.
- * 用hanlder的延迟实现倒计时功能
- */
 public class HandlerSimpleActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
 
@@ -26,72 +24,63 @@ public class HandlerSimpleActivity extends AppCompatActivity implements View.OnC
     private TextView mTimerTv;
     private Toolbar mToolbar;
 
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            curTime -= 1000;
+            mTimerTv.setText(TimeTools.getCountTimeByLong(curTime));
+            if (curTime > 0) {
+                mHandler.postDelayed(this, 1000);
+            } else {
+                Toast.makeText(mContext, "Finished", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common);
         mContext = this;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_hanlder_user);
 
         findViewById(R.id.btn_start).setOnClickListener(this);
         findViewById(R.id.btn_pause).setOnClickListener(this);
         findViewById(R.id.btn_cancel).setOnClickListener(this);
         findViewById(R.id.btn_resume).setOnClickListener(this);
-        mTimerTv = (TextView) findViewById(R.id.tv_countTime);
-
+        mTimerTv = findViewById(R.id.tv_countTime);
     }
-
-    private void initDownTimer() {
-
-
-    }
-    Handler mHandler = new Handler();
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            curTime -=1000;
-            mTimerTv.setText(TimeTools.getCountTimeByLong(curTime));
-            if (curTime > 0) {
-                mHandler.postDelayed(this, 1000);
-            } else {
-                Toast.makeText(mContext,"运行结束",Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
-
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_start:
-                curTime = MAX_TIME;
+        int viewId = view.getId();
+        if (viewId == R.id.btn_start) {
+            curTime = MAX_TIME;
+            isPause = false;
+            mHandler.removeCallbacks(runnable);
+            mHandler.postDelayed(runnable, 1000);
+        } else if (viewId == R.id.btn_cancel) {
+            isPause = false;
+            mHandler.removeCallbacks(runnable);
+        } else if (viewId == R.id.btn_pause) {
+            if (!isPause) {
+                isPause = true;
                 mHandler.removeCallbacks(runnable);
-                mHandler.postDelayed(runnable,1000);
-                break;
-            case R.id.btn_cancel:
-                mHandler.removeCallbacks(runnable);
-                break;
-            case R.id.btn_pause:
-                if (!isPause) {
-                    mHandler.removeCallbacks(runnable);
-                }
-                break;
-            case R.id.btn_resume:
+            }
+        } else if (viewId == R.id.btn_resume) {
+            if (isPause && curTime > 0) {
+                isPause = false;
                 mHandler.removeCallbacks(runnable);
                 mHandler.postDelayed(runnable, 1000);
-                break;
-            default:
-                break;
+            }
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mHandler != null) {
-            mHandler.removeCallbacks(runnable);
-        }
+        mHandler.removeCallbacks(runnable);
     }
 }

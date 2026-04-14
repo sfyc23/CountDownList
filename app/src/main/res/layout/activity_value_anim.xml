@@ -4,75 +4,110 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <include layout="@layout/layout_toolbar" />
-    <TextView
-        android:id="@+id/tv_countTime"
-        style="@style/textView_show"
-        android:text="空白" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_xl">
+
+        <TextView
+            android:id="@+id/tv_countTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="00:00"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/timer_display_large"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/pb_va"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:max="100"
+                android:progress="0"
+                app:indicatorColor="?attr/colorPrimary"
+                app:trackColor="?attr/colorSurfaceVariant"
+                app:trackCornerRadius="4dp"
+                app:trackThickness="8dp" />
+
+            <TextView
+                android:id="@+id/tv_va_percent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0%"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
-        <ProgressBar
-            android:id="@+id/pb_va"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progress="0"
-            android:max="100"
-            android:layout_weight="6"
-            android:paddingLeft="6dp"
-            android:paddingRight="2dp"
-            />
-        <TextView
-            android:id="@+id/tv_va_percent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0%"
-            android:gravity="center"
-            />
-    </LinearLayout>
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/spacing_2xl">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="64dp">
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_start"
+            style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
+            android:text="@string/action_start"
             android:textAllCaps="false"
-            android:text="Start" />
+            app:cornerRadius="@dimen/corner_button" />
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAllCaps="false"
-            android:text="Cancel" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_pause"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
+            android:text="@string/action_pause"
             android:textAllCaps="false"
-            android:text="Pause"
-            />
-        <Button
+            app:cornerRadius="@dimen/corner_button" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resume"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
+            android:text="@string/action_resume"
             android:textAllCaps="false"
-            android:text="Resume" />
+            app:cornerRadius="@dimen/corner_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="@string/action_cancel"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button"
+            app:strokeColor="?attr/colorError" />
 
     </LinearLayout>
+
 </LinearLayout>

@@ -7,54 +7,76 @@
 
     <include layout="@layout/layout_toolbar" />
 
-    <Chronometer
-        android:id="@+id/chronometer"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:gravity="center_vertical"
-        android:textSize="16sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_xl">
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/timer_display_large"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/spacing_2xl">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_start"
+            style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:text="Start"
-            android:textAllCaps="false" />
+            android:text="@string/action_start"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button" />
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cancel"
-            android:textAllCaps="false" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_pause"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:text="Pause"
-            android:textAllCaps="false" />
+            android:text="@string/action_pause"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_resume"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:text="Resume"
-            android:textAllCaps="false" />
+            android:text="@string/action_resume"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="@string/action_cancel"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/corner_button"
+            app:strokeColor="?attr/colorError" />
 
     </LinearLayout>
+
 </LinearLayout>

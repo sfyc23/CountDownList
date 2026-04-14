@@ -1,9 +1,38 @@
-*.iml
-.gradle
+# Android / Gradle build outputs
+/.gradle/
+/.gradle-user-home/
+/build/
+/*/build/
+/captures/
+/.externalNativeBuild/
+/.cxx/
+/.kotlin/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Local SDK and signing config
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+*.jks
+*.keystore
+*.p12
+
+# Android Studio / IntelliJ local files
+*.iml
+/.idea/*
+!/.idea/vcs.xml
+!/.idea/markdown-navigator.xml
+
+# Local documentation and notes
+/.doc/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# OS metadata
 .DS_Store
-/build
-/captures
-.externalNativeBuild
+Thumbs.db

@@ -2,18 +2,17 @@ package com.sfyc.countdownlist.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 /**
  * Author :leilei on 2017/3/27 1452.
  */
-
 public class PrefUtils {
+    private static final String PREF_NAME = "countdown_prefs";
     private static final String STARTED_TIME_ID = "pref_time";
-    private SharedPreferences mPreferences;
+    private final SharedPreferences mPreferences;
 
     public PrefUtils(Context c) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(c);
+        mPreferences = c.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
     public long getStartedTime() {
